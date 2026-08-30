@@ -6,40 +6,16 @@
   <title>راینو ERP | مرکز فرماندهی یکپارچه مالی، منابع انسانی، قراردادها و عملیات سازمان</title>
   <meta name="description" content="راینو ERP؛ مرکز فرماندهی یکپارچه سازمان. مدیریت جامع مالی، منابع انسانی، انبار، قراردادها، کارتابل، سامانه مؤدیان و اتوماسیون با معماری امن سازمانی.">
   
-  <!-- Tailwind CSS Play CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#050b14',
-              navy: '#0b1728',
-              card: '#0f2038',
-              border: '#1e385c',
-              cyan: '#38bdf8',
-              accent: '#06b6d4',
-              emerald: '#10b981',
-              blue: '#3b82f6',
-            }
-          },
-          fontFamily: {
-            vazir: ['Vazirmatn', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Pre-built Tailwind CSS (production) -->
+  <link rel="stylesheet" href="css/tailwind.css">
 
   <!-- Google Font: Vazirmatn -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide Icons (pinned version for production) -->
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
 
   <!-- Custom Landing Page Styles -->
   <link rel="stylesheet" href="css/landing.css">
@@ -78,12 +54,12 @@
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
           <a href="#hero" class="hover:text-cyan-400 transition-colors">صفحه اصلی</a>
-          <a href="#highlights" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a>
-          <a href="#modules" class="hover:text-cyan-400 transition-colors">۱۵ ماژول تخصصی</a>
-          <a href="#tech" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a>
-          <a href="#ui-ux" class="hover:text-cyan-400 transition-colors">رابط کاربری</a>
-          <a href="#matrix" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a>
-          <a href="#faq" class="hover:text-cyan-400 transition-colors">پرسش‌های متداول</a>
+          <a href="#categoryOverview" onclick="openCategory('highlights'); return false;" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a>
+          <a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">۱۵ ماژول تخصصی</a>
+          <a href="#categoryOverview" onclick="openCategory('tech'); return false;" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a>
+          <a href="#categoryOverview" onclick="openCategory('ui-ux'); return false;" class="hover:text-cyan-400 transition-colors">رابط کاربری</a>
+          <a href="#categoryOverview" onclick="openCategory('matrix'); return false;" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a>
+          <a href="#categoryOverview" onclick="openCategory('faq'); return false;" class="hover:text-cyan-400 transition-colors">پرسش‌های متداول</a>
         </nav>
 
         <!-- CTA Buttons -->
@@ -107,12 +83,12 @@
     <!-- Mobile Dropdown Menu -->
     <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 border-t border-slate-800/80 bg-slate-950/95 space-y-3">
       <a href="#hero" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">صفحه اصلی</a>
-      <a href="#highlights" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">مزایای رقابتی</a>
-      <a href="#modules" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">۱۵ ماژول تخصصی</a>
-      <a href="#tech" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">معماری فنی و امنیت</a>
-      <a href="#ui-ux" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">رابط کاربری</a>
-      <a href="#matrix" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">ماتریس امکانات</a>
-      <a href="#faq" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">پرسش‌های متداول</a>
+      <a href="#categoryOverview" onclick="openCategory('highlights'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">مزایای رقابتی</a>
+      <a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">۱۵ ماژول تخصصی</a>
+      <a href="#categoryOverview" onclick="openCategory('tech'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">معماری فنی و امنیت</a>
+      <a href="#categoryOverview" onclick="openCategory('ui-ux'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">رابط کاربری</a>
+      <a href="#categoryOverview" onclick="openCategory('matrix'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">ماتریس امکانات</a>
+      <a href="#categoryOverview" onclick="openCategory('faq'); return false;" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">پرسش‌های متداول</a>
       <div class="pt-3 grid grid-cols-2 gap-2">
         <button onclick="openDemoModal()" class="w-full py-2.5 text-center text-xs font-semibold text-slate-300 border border-slate-700 rounded-lg">ورود به پورتال</button>
         <button onclick="openDemoModal()" class="w-full py-2.5 text-center text-xs font-bold text-slate-950 bg-cyan-400 rounded-lg">دموی رایگان</button>
@@ -120,7 +96,7 @@
     </div>
   </header>
 
-  <!-- ==================== 2. HERO SECTION ==================== -->
+  <!-- ==================== 2. HERO SECTION (Always visible) ==================== -->
   <section id="hero" class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -147,9 +123,9 @@
               <i data-lucide="sparkles" class="w-4 h-4 text-slate-950"></i>
               <span>درخواست دموی رایگان</span>
             </button>
-            <a href="#modules" class="px-5 py-3.5 rounded-xl font-semibold text-slate-200 glass-card hover:border-cyan-400/50 hover:text-white hover:bg-slate-800/50 transition-all text-sm flex items-center gap-2">
+            <a href="#categoryOverview" class="px-5 py-3.5 rounded-xl font-semibold text-slate-200 glass-card hover:border-cyan-400/50 hover:text-white hover:bg-slate-800/50 transition-all text-sm flex items-center gap-2">
               <i data-lucide="layers" class="w-4 h-4 text-cyan-400"></i>
-              <span>مشاهده ماژول‌ها</span>
+              <span>مشاهده همه بخش‌ها</span>
             </a>
             <button onclick="openDemoModal()" class="px-5 py-3.5 rounded-xl font-semibold text-slate-300 border border-slate-700/80 hover:border-slate-500 hover:text-white transition-all text-sm flex items-center gap-2">
               <i data-lucide="phone-call" class="w-4 h-4 text-emerald-400"></i>
@@ -317,302 +293,414 @@
     </div>
   </section>
 
-  <!-- Glowing Divider -->
   <hr class="section-divider">
 
-  <!-- ==================== 3. KEY HIGHLIGHTS / VALUE PROPOSITIONS ==================== -->
-  <section id="highlights" class="section-reveal py-20 border-t border-slate-800/80 relative">
+  <!-- ==================== CATEGORY OVERVIEW GRID (Compact entry point) ==================== -->
+  <section id="categoryOverview" class="py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
+
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>VALUE PROPOSITIONS</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          ۸ مزیت رقابتی کلیدی <span class="text-gradient">راینو ERP</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          از داده خام تا تصمیم اجرایی؛ هر لایه از سامانه راینو برای پاسخگویی به چالش‌های واقعی و مقیاس‌پذیری سازمان‌های پیشرو طراحی شده است.
-        </p>
-      </div>
-
-      <!-- 8 Highlights Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="highlightsContainer">
-        <!-- Dynamically Populated by js/landing.js -->
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Glowing Divider -->
-  <hr class="section-divider">
-
-  <!-- ==================== 4. INTERACTIVE MODULE EXPLORER (15 MODULES) ==================== -->
-  <section id="modules" class="section-reveal py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>INTERACTIVE MODULE EXPLORER</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          کاوشگر تعاملی <span class="text-gradient">۱۵ ماژول جامع و تخصصی راینو</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          تمام ریزامکانات، کاربردهای تجاری و مسیرهای شاخص فنی هر یک از ۱۵ ماژول را بدون خلاصه کردن بررسی کنید.
-        </p>
-      </div>
-
-      <!-- Main Explorer Layout: Left (Desktop Sidebar) + Right (Detailed View) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- Left: Module Select Sidebar (4 cols) -->
-        <div class="lg:col-span-4 glass-card rounded-2xl p-3 border border-slate-800 max-h-[750px] overflow-y-auto space-y-1.5" id="moduleSidebar">
-          <!-- Populated by js/landing.js -->
-        </div>
-
-        <!-- Right: Active Module Detailed Content (8 cols) -->
-        <div class="lg:col-span-8 glass-card rounded-2xl p-6 sm:p-8 border border-cyan-500/30 relative min-h-[600px]" id="moduleContentArea">
-          <!-- Populated by js/landing.js -->
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Glowing Divider -->
-  <hr class="section-divider">
-
-  <!-- ==================== 5. TECHNICAL & SECURITY ARCHITECTURE ==================== -->
-  <section id="tech" class="section-reveal py-20 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>TECHNICAL & SECURITY ARCHITECTURE</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          مهندسی‌شده برای <span class="text-gradient">اعتماد، پایداری و امنیت سازمانی</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          معماری لایه‌ای مدرن مبتنی بر دات‌نت، عایق‌سازی چندسطحی پایگاه‌داده و استانداردهای سخت‌گیرانه دسترسی.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <!-- Tech Stacks (7 cols) -->
-        <div class="lg:col-span-7 space-y-4" id="techStackContainer">
-          <!-- Populated by js/landing.js -->
-        </div>
-
-        <!-- Defense in Depth & Security (5 cols) -->
-        <div class="lg:col-span-5 glass-card rounded-2xl p-7 border border-blue-500/30 space-y-6">
-          <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-            <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              <i data-lucide="shield-alert" class="w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">زنجیره دفاع در عمق (Defense in Depth)</h3>
-              <p class="text-xs text-slate-400">پوشش چندلایه از شبکه تا فیلدهای حساس دیتابیس</p>
-            </div>
-          </div>
-
-          <div class="space-y-3.5 text-xs text-slate-300">
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-              <i data-lucide="key" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
-              <div>
-                <strong class="text-white block mb-0.5">هویت و احراز دسترسی:</strong>
-                <span>ASP.NET Identity، احراز دومرحله‌ای MFA/TOTP، کدهای بازیابی، مدیریت ضد جعل فرم و توکن‌های امنیتی.</span>
-              </div>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-              <i data-lucide="shield" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i>
-              <div>
-                <strong class="text-white block mb-0.5">کنترل دسترسی پیشرفته (ABAC & SoD):</strong>
-                <span>مجوزهای سفارشی PermissionAuthorize، کنترل Query، ماسک کردن داده‌های حساس و تفکیک وظایف سازمانی.</span>
-              </div>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-              <i data-lucide="file-check" class="w-4 h-4 text-purple-400 mt-0.5 shrink-0"></i>
-              <div>
-                <strong class="text-white block mb-0.5">حسابرسی کامل و SIEM:</strong>
-                <span>ثبت خودکار رویدادها با Audit SaveChanges Interceptor، ردیابی تغییرات در سطح فیلد و خروجی لاگ‌های SIEM.</span>
-              </div>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-              <i data-lucide="activity" class="w-4 h-4 text-amber-400 mt-0.5 shrink-0"></i>
-              <div>
-                <strong class="text-white block mb-0.5">قابلیت اطمینان و صف رویدادها:</strong>
-                <span>صف پیام RabbitMQ، الگوی Outbox Publisher، صف پیام‌های خطا (Dead Letter) و SignalR برای تبادل آنی.</span>
-              </div>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-              <i data-lucide="bot" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
-              <div>
-                <strong class="text-white block mb-0.5">هوش مصنوعی ایمن (Secure AI):</strong>
-                <span>کنترل ایمنی کوئری‌های SQL، خواندن امن اسکیمای SQL Server، پلن اجرایی محدود و اعتبارسنجی خروجی.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Glowing Divider -->
-  <hr class="section-divider">
-
-  <!-- ==================== 6. UI/UX STRENGTHS ==================== -->
-  <section id="ui-ux" class="section-reveal py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>UI / UX & USER EXPERIENCE</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          طراحی فارسی، روان و <span class="text-gradient">بدون اصطکاک</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          تجربه کاربری منحصربه‌فرد با انطباق کامل بر الزامات اداری و استانداردهای مدرن فرانت‌اند بدون وابستگی به فریم‌ورک‌های سنگین قدیمی.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="uxCardsContainer">
-        <!-- Populated by js/landing.js -->
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Glowing Divider -->
-  <hr class="section-divider">
-
-  <!-- ==================== 7. INTERACTIVE FEATURE MATRIX WITH LIVE SEARCH ==================== -->
-  <section id="matrix" class="section-reveal py-20 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>LIVE FEATURE MATRIX</span>
+          <span>EXPLORE RHYNO ERP</span>
         </div>
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          ماتریس تعاملی و <span class="text-gradient">جست‌وجوی زنده امکانات</span>
+          کاوش در بخش‌های <span class="text-gradient">راینو ERP</span>
         </h2>
         <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          بیش از ۵۰ قابلیت و ماژول را با فیلتر آنی بر اساس کلمات کلیدی (مثل OCR، بیمه، امضا)، دسته‌بندی کاربری و نوع عملیات جستجو کنید.
+          برای مشاهده جزئیات هر بخش، روی کارت مورد نظر کلیک کنید.
         </p>
       </div>
 
-      <!-- Filter Controls Bar -->
-      <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 mb-6 flex flex-col md:flex-row gap-4 items-center">
+      <!-- 2x3 Category Cards Grid -->
+      <div class="category-grid">
+
+        <!-- Card 1: Highlights -->
+        <div class="category-card" onclick="openCategory('highlights')">
+          <div class="category-card-icon"><i data-lucide="zap" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">۸ مزیت رقابتی کلیدی</h3>
+          <p class="category-card-desc">یکپارچگی کامل، داشبوردهای تصمیم‌ساز، اتوماسیون هوشمند و امنیت سازمانی چندلایه</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+        <!-- Card 2: Modules -->
+        <div class="category-card" onclick="openCategory('modules')">
+          <div class="category-card-icon"><i data-lucide="layers" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">۱۵ ماژول تخصصی</h3>
+          <p class="category-card-desc">مالی، منابع انسانی، قرارداد، انبار، OCR، کارتابل، سامانه مؤدیان و ... با جزئیات فنی کامل</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+        <!-- Card 3: Tech Architecture -->
+        <div class="category-card" onclick="openCategory('tech')">
+          <div class="category-card-icon"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">معماری فنی و امنیت</h3>
+          <p class="category-card-desc">لایه‌های فناوری و زنجیره دفاع در عمق با ABAC، MFA، RabbitMQ و معماری دات‌نت</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+        <!-- Card 4: UI/UX -->
+        <div class="category-card" onclick="openCategory('ui-ux')">
+          <div class="category-card-icon"><i data-lucide="smartphone" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">رابط کاربری و تجربه</h3>
+          <p class="category-card-desc">طراحی فارسی، روان و واکنش‌گرا با فونت وزیرمتن، جستجوی سریع و تعاملات بدون رفرش</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+        <!-- Card 5: Feature Matrix -->
+        <div class="category-card" onclick="openCategory('matrix')">
+          <div class="category-card-icon"><i data-lucide="table" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">ماتریس امکانات</h3>
+          <p class="category-card-desc">جستجوی زنده بیش از ۵۰ قابلیت و ماژول با فیلتر بر اساس دسته‌بندی کاربری و نوع عملیات</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+        <!-- Card 6: FAQ -->
+        <div class="category-card" onclick="openCategory('faq')">
+          <div class="category-card-icon"><i data-lucide="help-circle" class="w-6 h-6"></i></div>
+          <h3 class="category-card-title">پرسش‌های متداول</h3>
+          <p class="category-card-desc">پاسخ به سوالات کلیدی درباره امنیت، چندمستاجری، استقرار، مالیات و هوش مصنوعی راینو</p>
+          <span class="category-card-badge">
+            <i data-lucide="chevron-left" class="w-3 h-3"></i>
+            <span>مشاهده جزئیات</span>
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SECTION DETAIL PANELS (Hidden by default) ==================== -->
+
+  <!-- DETAIL PANEL: Highlights -->
+  <div id="detail-highlights" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
         
-        <!-- Live Search Input -->
-        <div class="relative flex-1 w-full">
-          <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2"></i>
-          <input 
-            type="text" 
-            id="matrixSearch" 
-            placeholder="جستجوی زنده (مثلاً: OCR، بیمه، امضا، مؤدیان، فاکتور، حقوق، تراز...)" 
-            class="w-full pr-11 pl-4 py-3 bg-slate-900/90 text-slate-100 placeholder-slate-500 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium transition-colors"
-          >
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>VALUE PROPOSITIONS</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            ۸ مزیت رقابتی کلیدی <span class="text-gradient">راینو ERP</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            از داده خام تا تصمیم اجرایی؛ هر لایه از سامانه راینو برای پاسخگویی به چالش‌های واقعی و مقیاس‌پذیری سازمان‌های پیشرو طراحی شده است.
+          </p>
         </div>
 
-        <!-- User Role Filter -->
-        <div class="w-full md:w-56">
-          <select id="userRoleFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
-            <option value="">همه دسته‌های کاربر</option>
-            <option value="مدیر">مدیر</option>
-            <option value="حسابدار">حسابدار / مدیر مالی</option>
-            <option value="کارمند">کارمند / منابع انسانی</option>
-            <option value="انباردار">انباردار / مدیر انبار</option>
-            <option value="ممیز">ممیز مالیاتی</option>
-            <option value="مدیر سیستم">مدیر سیستم / ادمین</option>
-            <option value="عمومی">عمومی مجاز</option>
-          </select>
-        </div>
-
-        <!-- Feature Kind Filter -->
-        <div class="w-full md:w-48">
-          <select id="featureKindFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
-            <option value="">همه انواع قابلیت</option>
-            <option value="ابزار">ابزار عملیاتی</option>
-            <option value="گردش‌کار">گردش‌کار (Workflow)</option>
-            <option value="گزارش">گزارش و تحلیل</option>
-          </select>
+        <!-- 8 Highlights Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="highlightsContainer">
+          <!-- Dynamically Populated by js/landing.js -->
         </div>
 
       </div>
+    </section>
+  </div>
 
-      <!-- Feature Count & Reset -->
-      <div class="flex items-center justify-between px-2 mb-3 text-xs text-slate-400">
-        <span id="matrixResultsCount">در حال بارگذاری جدول...</span>
-        <button id="resetMatrixFilter" class="text-cyan-400 hover:text-cyan-300 underline text-xs hidden">پاک کردن فیلترها</button>
-      </div>
-
-      <!-- Matrix Table Container -->
-      <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-        <div class="overflow-x-auto">
-          <table class="w-full text-right text-sm">
-            <thead class="bg-slate-900/95 text-slate-300 font-bold border-b border-slate-800 text-xs">
-              <tr>
-                <th class="py-4 px-5">نام امکان</th>
-                <th class="py-4 px-5">ماژول مربوطه</th>
-                <th class="py-4 px-5">دسته کاربر</th>
-                <th class="py-4 px-5">نوع قابلیت</th>
-              </tr>
-            </thead>
-            <tbody id="matrixTableBody" class="divide-y divide-slate-800/60 text-slate-300 text-xs sm:text-sm">
-              <!-- Populated by js/landing.js -->
-            </tbody>
-          </table>
+  <!-- DETAIL PANEL: Modules -->
+  <div id="detail-modules" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>INTERACTIVE MODULE EXPLORER</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            کاوشگر تعاملی <span class="text-gradient">۱۵ ماژول جامع و تخصصی راینو</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            تمام ریزامکانات، کاربردهای تجاری و مسیرهای شاخص فنی هر یک از ۱۵ ماژول را بدون خلاصه کردن بررسی کنید.
+          </p>
         </div>
+
+        <!-- Main Explorer Layout: Left (Desktop Sidebar) + Right (Detailed View) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left: Module Select Sidebar (4 cols) -->
+          <div class="lg:col-span-4 glass-card rounded-2xl p-3 border border-slate-800 max-h-[750px] overflow-y-auto space-y-1.5" id="moduleSidebar">
+            <!-- Populated by js/landing.js -->
+          </div>
+
+          <!-- Right: Active Module Detailed Content (8 cols) -->
+          <div class="lg:col-span-8 glass-card rounded-2xl p-6 sm:p-8 border border-cyan-500/30 relative min-h-[600px]" id="moduleContentArea">
+            <!-- Populated by js/landing.js -->
+          </div>
+
+        </div>
+
       </div>
+    </section>
+  </div>
 
-    </div>
-  </section>
+  <!-- DETAIL PANEL: Technical Architecture -->
+  <div id="detail-tech" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>TECHNICAL & SECURITY ARCHITECTURE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            مهندسی‌شده برای <span class="text-gradient">اعتماد، پایداری و امنیت سازمانی</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            معماری لایه‌ای مدرن مبتنی بر دات‌نت، عایق‌سازی چندسطحی پایگاه‌داده و استانداردهای سخت‌گیرانه دسترسی.
+          </p>
+        </div>
 
-  <!-- Glowing Divider -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Tech Stacks (7 cols) -->
+          <div class="lg:col-span-7 space-y-4" id="techStackContainer">
+            <!-- Populated by js/landing.js -->
+          </div>
+
+          <!-- Defense in Depth & Security (5 cols) -->
+          <div class="lg:col-span-5 glass-card rounded-2xl p-7 border border-blue-500/30 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+              <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <i data-lucide="shield-alert" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white">زنجیره دفاع در عمق (Defense in Depth)</h3>
+                <p class="text-xs text-slate-400">پوشش چندلایه از شبکه تا فیلدهای حساس دیتابیس</p>
+              </div>
+            </div>
+
+            <div class="space-y-3.5 text-xs text-slate-300">
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="key" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
+                <div>
+                  <strong class="text-white block mb-0.5">هویت و احراز دسترسی:</strong>
+                  <span>ASP.NET Identity، احراز دومرحله‌ای MFA/TOTP، کدهای بازیابی، مدیریت ضد جعل فرم و توکن‌های امنیتی.</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="shield" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i>
+                <div>
+                  <strong class="text-white block mb-0.5">کنترل دسترسی پیشرفته (ABAC & SoD):</strong>
+                  <span>مجوزهای سفارشی PermissionAuthorize، کنترل Query، ماسک کردن داده‌های حساس و تفکیک وظایف سازمانی.</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="file-check" class="w-4 h-4 text-purple-400 mt-0.5 shrink-0"></i>
+                <div>
+                  <strong class="text-white block mb-0.5">حسابرسی کامل و SIEM:</strong>
+                  <span>ثبت خودکار رویدادها با Audit SaveChanges Interceptor، ردیابی تغییرات در سطح فیلد و خروجی لاگ‌های SIEM.</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="activity" class="w-4 h-4 text-amber-400 mt-0.5 shrink-0"></i>
+                <div>
+                  <strong class="text-white block mb-0.5">قابلیت اطمینان و صف رویدادها:</strong>
+                  <span>صف پیام RabbitMQ، الگوی Outbox Publisher، صف پیام‌های خطا (Dead Letter) و SignalR برای تبادل آنی.</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="bot" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
+                <div>
+                  <strong class="text-white block mb-0.5">هوش مصنوعی ایمن (Secure AI):</strong>
+                  <span>کنترل ایمنی کوئری‌های SQL، خواندن امن اسکیمای SQL Server، پلن اجرایی محدود و اعتبارسنجی خروجی.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- DETAIL PANEL: UI/UX -->
+  <div id="detail-ui-ux" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>UI / UX & USER EXPERIENCE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            طراحی فارسی، روان و <span class="text-gradient">بدون اصطکاک</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            تجربه کاربری منحصربه‌فرد با انطباق کامل بر الزامات اداری و استانداردهای مدرن فرانت‌اند بدون وابستگی به فریم‌ورک‌های سنگین قدیمی.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="uxCardsContainer">
+          <!-- Populated by js/landing.js -->
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- DETAIL PANEL: Feature Matrix -->
+  <div id="detail-matrix" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
+        
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>LIVE FEATURE MATRIX</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            ماتریس تعاملی و <span class="text-gradient">جست‌وجوی زنده امکانات</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            بیش از ۵۰ قابلیت و ماژول را با فیلتر آنی بر اساس کلمات کلیدی (مثل OCR، بیمه، امضا)، دسته‌بندی کاربری و نوع عملیات جستجو کنید.
+          </p>
+        </div>
+
+        <!-- Filter Controls Bar -->
+        <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 mb-6 flex flex-col md:flex-row gap-4 items-center">
+          
+          <!-- Live Search Input -->
+          <div class="relative flex-1 w-full">
+            <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="matrixSearch" 
+              placeholder="جستجوی زنده (مثلاً: OCR، بیمه، امضا، مؤدیان، فاکتور، حقوق، تراز...)" 
+              class="w-full pr-11 pl-4 py-3 bg-slate-900/90 text-slate-100 placeholder-slate-500 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium transition-colors"
+            >
+          </div>
+
+          <!-- User Role Filter -->
+          <div class="w-full md:w-56">
+            <select id="userRoleFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
+              <option value="">همه دسته‌های کاربر</option>
+              <option value="مدیر">مدیر</option>
+              <option value="حسابدار">حسابدار / مدیر مالی</option>
+              <option value="کارمند">کارمند / منابع انسانی</option>
+              <option value="انباردار">انباردار / مدیر انبار</option>
+              <option value="ممیز">ممیز مالیاتی</option>
+              <option value="مدیر سیستم">مدیر سیستم / ادمین</option>
+              <option value="عمومی">عمومی مجاز</option>
+            </select>
+          </div>
+
+          <!-- Feature Kind Filter -->
+          <div class="w-full md:w-48">
+            <select id="featureKindFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
+              <option value="">همه انواع قابلیت</option>
+              <option value="ابزار">ابزار عملیاتی</option>
+              <option value="گردش‌کار">گردش‌کار (Workflow)</option>
+              <option value="گزارش">گزارش و تحلیل</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Feature Count & Reset -->
+        <div class="flex items-center justify-between px-2 mb-3 text-xs text-slate-400">
+          <span id="matrixResultsCount">در حال بارگذاری جدول...</span>
+          <button id="resetMatrixFilter" class="text-cyan-400 hover:text-cyan-300 underline text-xs hidden">پاک کردن فیلترها</button>
+        </div>
+
+        <!-- Matrix Table Container -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-sm">
+              <thead class="bg-slate-900/95 text-slate-300 font-bold border-b border-slate-800 text-xs">
+                <tr>
+                  <th class="py-4 px-5">نام امکان</th>
+                  <th class="py-4 px-5">ماژول مربوطه</th>
+                  <th class="py-4 px-5">دسته کاربر</th>
+                  <th class="py-4 px-5">نوع قابلیت</th>
+                </tr>
+              </thead>
+              <tbody id="matrixTableBody" class="divide-y divide-slate-800/60 text-slate-300 text-xs sm:text-sm">
+                <!-- Populated by js/landing.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- DETAIL PANEL: FAQ -->
+  <div id="detail-faq" class="section-detail-panel">
+    <section class="py-16 lg:py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onclick="closeCategory()" class="detail-back-btn">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>بازگشت به فهرست بخش‌ها</span>
+        </button>
+        
+        <div class="text-center mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+            <span>FAQ ACCORDION</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            پاسخ به پرسش‌های <span class="text-gradient">متداول سازمان‌ها</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            پاسخ به سوالات کلیدی پیرامون امنیت، چندمستاجری، استقرار، مالیات و هوش مصنوعی در راینو ERP.
+          </p>
+        </div>
+
+        <!-- Accordion items container -->
+        <div class="space-y-4" id="faqAccordionContainer">
+          <!-- Populated by js/landing.js -->
+        </div>
+
+      </div>
+    </section>
+  </div>
+
   <hr class="section-divider">
 
-  <!-- ==================== 8. FAQ ACCORDION ==================== -->
-  <section id="faq" class="section-reveal py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center mb-14 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
-          <span>FAQ ACCORDION</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
-          پاسخ به پرسش‌های <span class="text-gradient">متداول سازمان‌ها</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          پاسخ به سوالات کلیدی پیرامون امنیت، چندمستاجری، استقرار، مالیات و هوش مصنوعی در راینو ERP.
-        </p>
-      </div>
-
-      <!-- Accordion items container -->
-      <div class="space-y-4" id="faqAccordionContainer">
-        <!-- Populated by js/landing.js -->
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Glowing Divider -->
-  <hr class="section-divider">
-
-  <!-- ==================== 9. CTA BANNER & FOOTER ==================== -->
+  <!-- ==================== CTA BANNER & FOOTER ==================== -->
   <section class="section-reveal py-16 border-t border-slate-800/80 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="glass-card rounded-3xl p-8 sm:p-12 border border-cyan-500/30 text-center relative overflow-hidden">
@@ -632,7 +720,7 @@
               <span>شروع گفت‌وگو و دریافت دمو</span>
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </button>
-            <a href="#modules" class="px-6 py-4 rounded-xl font-bold text-slate-200 glass-card hover:bg-slate-800/60 hover:text-white transition-all text-sm flex items-center gap-2">
+            <a href="#categoryOverview" class="px-6 py-4 rounded-xl font-bold text-slate-200 glass-card hover:bg-slate-800/60 hover:text-white transition-all text-sm flex items-center gap-2">
               <i data-lucide="book-open" class="w-4 h-4 text-cyan-400"></i>
               <span>مطالعه مستندات ماژول‌ها</span>
             </a>
@@ -663,10 +751,10 @@
           <h4 class="text-sm font-bold text-slate-200">بخش‌های وب‌سایت</h4>
           <ul class="space-y-2">
             <li><a href="#hero" class="hover:text-cyan-400 transition-colors">صفحه اصلی </a></li>
-            <li><a href="#highlights" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a></li>
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">ماژول‌های ۱۵گانه</a></li>
-            <li><a href="#tech" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a></li>
-            <li><a href="#matrix" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('highlights'); return false;" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">ماژول‌های ۱۵گانه</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('tech'); return false;" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('matrix'); return false;" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a></li>
           </ul>
         </div>
 
@@ -674,11 +762,11 @@
         <div class="space-y-2.5">
           <h4 class="text-sm font-bold text-slate-200">ماژول‌های شاخص</h4>
           <ul class="space-y-2">
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">داشبورد و هوش مصنوعی</a></li>
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">منابع انسانی و حقوق و دستمزد</a></li>
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">حسابداری و سامانه مؤدیان</a></li>
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">ورود هوشمند OCR فاکتور</a></li>
-            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">مدیریت قرارداد و کارتابل</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">داشبورد و هوش مصنوعی</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">منابع انسانی و حقوق و دستمزد</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">حسابداری و سامانه مؤدیان</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">ورود هوشمند OCR فاکتور</a></li>
+            <li><a href="#categoryOverview" onclick="openCategory('modules'); return false;" class="hover:text-cyan-400 transition-colors">مدیریت قرارداد و کارتابل</a></li>
           </ul>
         </div>
 

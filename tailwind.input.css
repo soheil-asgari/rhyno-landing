@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #050b14;
+  --color-brand-navy: #0b1728;
+  --color-brand-card: #0f2038;
+  --color-brand-border: #1e385c;
+  --color-brand-cyan: #38bdf8;
+  --color-brand-accent: #06b6d4;
+  --color-brand-emerald: #10b981;
+  --color-brand-blue: #3b82f6;
+
+  --font-family-vazir: 'Vazirmatn', sans-serif;
+}
+
+/* Dark mode via class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}

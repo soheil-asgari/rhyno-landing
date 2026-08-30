@@ -993,13 +993,13 @@ function initScrollReveal() {
 function initProgressBar() {
   const bar = document.createElement('div');
   bar.id = 'readingProgress';
-  bar.style.cssText = `
-    position: fixed; top: 0; left: 0; z-index: 9999;
-    height: 2px; background: linear-gradient(90deg, #38bdf8, #06b6d4, #10b981);
-    width: 0%; transition: width 0.1s ease-out;
-    border-radius: 0 2px 2px 0;
-    box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
-  `;
+  bar.style.cssText = [
+    'position: fixed; top: 0; left: 0; z-index: 9999;',
+    'height: 2px; background: linear-gradient(90deg, #38bdf8, #06b6d4, #10b981);',
+    'width: 0%; transition: width 0.1s ease-out;',
+    'border-radius: 0 2px 2px 0;',
+    'box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);',
+  ].join(' ');
   document.body.prepend(bar);
 
   let ticking = false;
@@ -1015,6 +1015,49 @@ function initProgressBar() {
       ticking = true;
     }
   });
+}
+
+// ========================================================
+// CATEGORY DRILL-DOWN NAVIGATION
+// ========================================================
+
+/** Open a category detail panel, hide the overview grid */
+function openCategory(categoryId) {
+  var overview = document.getElementById('categoryOverview');
+  var panels = document.querySelectorAll('.section-detail-panel');
+
+  if (overview) {
+    overview.classList.add('hidden-overview');
+  }
+
+  panels.forEach(function(p) {
+    p.classList.remove('active');
+  });
+
+  var target = document.getElementById('detail-' + categoryId);
+  if (target) {
+    target.classList.add('active');
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  if (typeof lucide !== 'undefined') {
+    setTimeout(function() { lucide.createIcons(); }, 50);
+  }
+}
+
+/** Go back from a category detail to the overview grid */
+function closeCategory() {
+  var overview = document.getElementById('categoryOverview');
+  var panels = document.querySelectorAll('.section-detail-panel');
+
+  panels.forEach(function(p) {
+    p.classList.remove('active');
+  });
+
+  if (overview) {
+    overview.classList.remove('hidden-overview');
+    overview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 // ========================================================
