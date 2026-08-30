@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhyno AI | مرکز فرماندهی هوش مصنوعی شما</title>
+  <meta name="description" content="همه مدل‌های قدرتمند AI در دستان شما، سریع و بدون پیچیدگی." />
+  <link rel="icon" type="image/png" href="assets/rhyno-logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dark">
+
+  <!-- Theme Toggle -->
+  <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم">
+    <span id="themeIcon">☀️</span>
+  </button>
+
+  <!-- Starry Background -->
+  <div class="starry-bg">
+    <div class="stars"></div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- HEADER                                      -->
+  <!-- ========================================== -->
+  <header class="site-header">
+    <div class="container header-nav">
+      <div class="header-brand">
+        <img src="assets/rhyno-logo.png" alt="Rhyno AI Logo" />
+        <span>Rhyno AI</span>
+      </div>
+
+      <div class="header-links">
+        <a href="contact.html">تماس با ما</a>
+        <a href="#about">درباره ما</a>
+        <a href="#pricing">تعرفه‌ها</a>
+        <a href="#features">ویژگی‌ها</a>
+        <a href="/login" class="header-cta">
+          <span>ورود به حساب</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="منو">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="contact.html">تماس با ما</a>
+      <a href="#about">درباره ما</a>
+      <a href="#pricing">تعرفه‌ها</a>
+      <a href="#features">ویژگی‌ها</a>
+      <a href="/login">ورود به حساب</a>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- HERO                                       -->
+  <!-- ========================================== -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="fade-in-up" style="animation-delay: 0.1s">مرکز فرماندهی هوش مصنوعی شما</h1>
+      <p class="fade-in-up" style="animation-delay: 0.2s">
+        همه مدل‌های قدرتمند <span dir="ltr">AI</span> در دستان شما، سریع و بدون پیچیدگی.
+      </p>
+      <div class="fade-in-up" style="animation-delay: 0.3s">
+        <a href="#pricing" class="hero-btn">شروع قدرتمند</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ANIMATION (CSS Lottie-like placeholder)    -->
+  <!-- ========================================== -->
+  <div class="animation-container fade-in-up" style="animation-delay: 0.4s">
+    <div style="position:relative;width:100%;max-width:400px;margin:0 auto">
+      <canvas id="lottieCanvas" width="800" height="600" style="width:100%;height:auto"></canvas>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TRUSTED LOGOS (Ticker)                     -->
+  <!-- ========================================== -->
+  <section class="logos-section fade-in-up" style="animation-delay: 0.5s">
+    <div class="container">
+      <p>مورد اعتماد با استفاده از مدل‌های پیشرو</p>
+      <div class="logo-ticker">
+        <div class="logo-ticker-inner" id="logoScroller">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- FEATURES                                   -->
+  <!-- ========================================== -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">
+        چرا <span dir="ltr">Rhyno AI</span> بهترین انتخاب است؟
+      </h2>
+
+      <div class="features-grid" id="featuresGrid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- PRICING                                    -->
+  <!-- ========================================== -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="pricing-card fade-in-up">
+        <h3>پلن دسترسی کامل</h3>
+        <p>
+          همه ابزارها، همیشه و بدون محدودیت، با پلن
+          <span style="position:relative;cursor:help;font-weight:500;color:hsl(var(--foreground))">
+            pay as you go
+            <span style="position:absolute;bottom:100%;left:50%;margin-bottom:0.5rem;transform:translateX(-50%);width:max-content;background:hsl(var(--secondary));padding:0.25rem 0.75rem;border-radius:0.5rem;font-size:0.75rem;color:hsl(var(--foreground));opacity:0;transition:opacity 0.2s;white-space:nowrap"
+                  onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+              در این پلن فقط به اندازه استفاده‌تون پرداخت می‌کنید
+            </span>
+          </span>
+        </p>
+        <p class="pricing-price">
+          برای اطلاعات بیشتر از تعرفه‌ها روی دکمه زیر کلیک کنید
+        </p>
+        <a href="/checkout" class="pricing-btn small">تهیه اشتراک و شروع استفاده</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span>. تمامی حقوق محفوظ است.</p>
+      <div class="enamad-seal">
+        <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT">
+          <img referrerpolicy="origin" src="https://trustseal.enamad.ir/logo.aspx?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT" alt="نماد اعتماد الکترونیکی" style="cursor:pointer;width:125px;height:125px;" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
