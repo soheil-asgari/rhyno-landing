@@ -1,155 +1,1870 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!doctype html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rhyno AI | مرکز فرماندهی هوش مصنوعی شما</title>
-  <meta name="description" content="همه مدل‌های قدرتمند AI در دستان شما، سریع و بدون پیچیدگی." />
-  <link rel="icon" type="image/png" href="assets/rhyno-logo.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>راینو ERP | مرکز فرماندهی یکپارچه مالی، منابع انسانی، قراردادها و عملیات سازمان</title>
+  <meta name="description" content="راینو ERP؛ مرکز فرماندهی یکپارچه سازمان. مدیریت جامع مالی، منابع انسانی، انبار، قراردادها، کارتابل، سامانه مؤدیان و اتوماسیون با معماری امن سازمانی.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#050b14',
+              navy: '#0b1728',
+              card: '#0f2038',
+              border: '#1e385c',
+              cyan: '#38bdf8',
+              accent: '#06b6d4',
+              emerald: '#10b981',
+              blue: '#3b82f6',
+            }
+          },
+          fontFamily: {
+            vazir: ['Vazirmatn', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Font: Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: #050b14;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    
+    /* Background Glow Effects */
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      background: 
+        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 75%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #050b14 0%, #081322 50%, #050b14 100%);
+    }
+
+    .grid-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: -9;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Glassmorphism Styles */
+    .glass-card {
+      background: rgba(13, 27, 46, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.12);
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.37);
+    }
+    
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 20px 40px 0 rgba(6, 182, 212, 0.12);
+    }
+
+    .glass-nav {
+      background: rgba(5, 11, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050b14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e3a5f;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 10%, #38bdf8 55%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Tab Active Indicator */
+    .tab-active {
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.18), rgba(59, 130, 246, 0.15)) !important;
+      border-color: rgba(56, 189, 248, 0.6) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+    }
+
+    /* Animation on Module Change */
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-module-content {
+      animation: fadeInSlide 0.35s ease-out forwards;
+    }
+
+    /* Custom badge pulsate */
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+  </style>
 </head>
-<body class="dark">
+<body class="antialiased selection:bg-cyan-500 selection:text-black">
+  <div class="bg-mesh"></div>
+  <div class="grid-pattern"></div>
 
-  <!-- Theme Toggle -->
-  <button id="themeToggle" class="theme-toggle" aria-label="تغییر تم">
-    <span id="themeIcon">☀️</span>
-  </button>
-
-  <!-- Starry Background -->
-  <div class="starry-bg">
-    <div class="stars"></div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- HEADER                                      -->
-  <!-- ========================================== -->
-  <header class="site-header">
-    <div class="container header-nav">
-      <div class="header-brand">
-        <img src="assets/rhyno-logo.png" alt="Rhyno AI Logo" />
-        <span>Rhyno AI</span>
-      </div>
-
-      <div class="header-links">
-        <a href="contact.html">تماس با ما</a>
-        <a href="#about">درباره ما</a>
-        <a href="#pricing">تعرفه‌ها</a>
-        <a href="#features">ویژگی‌ها</a>
-        <a href="/login" class="header-cta">
-          <span>ورود به حساب</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  <!-- ==================== 1. NAVIGATION HEADER ==================== -->
+  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform duration-300">
+            <span class="text-slate-950 font-black text-2xl font-mono tracking-tighter">R</span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="text-xl font-extrabold text-white tracking-tight">راینو</span>
+              <span class="text-xs font-black uppercase px-2 py-0.5 rounded-md bg-cyan-500/15 text-cyan-400 border border-cyan-500/30">ERP</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-medium">مرکز فرماندهی یکپارچه سازمان</span>
+          </div>
         </a>
-      </div>
 
-      <button class="hamburger" id="hamburger" aria-label="منو">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <a href="#hero" class="hover:text-cyan-400 transition-colors">صفحه اصلی</a>
+          <a href="#highlights" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a>
+          <a href="#modules" class="hover:text-cyan-400 transition-colors">۱۵ ماژول تخصصی</a>
+          <a href="#tech" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a>
+          <a href="#ui-ux" class="hover:text-cyan-400 transition-colors">رابط کاربری</a>
+          <a href="#matrix" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a>
+          <a href="#faq" class="hover:text-cyan-400 transition-colors">پرسش‌های متداول</a>
+        </nav>
+
+        <!-- CTA Buttons -->
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="#portal-login" onclick="openDemoModal(); return false;" class="px-4 py-2.5 text-sm font-semibold text-slate-300 hover:text-white border border-slate-700/80 rounded-xl hover:bg-slate-800/60 hover:border-slate-600 transition-all">
+            ورود به پورتال
+          </a>
+          <button onclick="openDemoModal()" class="px-5 py-2.5 text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl hover:from-cyan-300 hover:to-blue-400 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2">
+            <span>درخواست دموی رایگان</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800" aria-label="منوی موبایل">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="contact.html">تماس با ما</a>
-      <a href="#about">درباره ما</a>
-      <a href="#pricing">تعرفه‌ها</a>
-      <a href="#features">ویژگی‌ها</a>
-      <a href="/login">ورود به حساب</a>
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 border-t border-slate-800/80 bg-slate-950/95 space-y-3">
+      <a href="#hero" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">صفحه اصلی</a>
+      <a href="#highlights" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">مزایای رقابتی</a>
+      <a href="#modules" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">۱۵ ماژول تخصصی</a>
+      <a href="#tech" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">معماری فنی و امنیت</a>
+      <a href="#ui-ux" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">رابط کاربری</a>
+      <a href="#matrix" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">ماتریس امکانات</a>
+      <a href="#faq" class="block py-2 text-slate-200 hover:text-cyan-400 font-medium">پرسش‌های متداول</a>
+      <div class="pt-3 grid grid-cols-2 gap-2">
+        <button onclick="openDemoModal()" class="w-full py-2.5 text-center text-xs font-semibold text-slate-300 border border-slate-700 rounded-lg">ورود به پورتال</button>
+        <button onclick="openDemoModal()" class="w-full py-2.5 text-center text-xs font-bold text-slate-950 bg-cyan-400 rounded-lg">دموی رایگان</button>
+      </div>
     </div>
   </header>
 
-  <!-- ========================================== -->
-  <!-- HERO                                       -->
-  <!-- ========================================== -->
-  <section class="hero">
-    <div class="container">
-      <h1 class="fade-in-up" style="animation-delay: 0.1s">مرکز فرماندهی هوش مصنوعی شما</h1>
-      <p class="fade-in-up" style="animation-delay: 0.2s">
-        همه مدل‌های قدرتمند <span dir="ltr">AI</span> در دستان شما، سریع و بدون پیچیدگی.
-      </p>
-      <div class="fade-in-up" style="animation-delay: 0.3s">
-        <a href="#pricing" class="hero-btn">شروع قدرتمند</a>
+  <!-- ==================== 2. HERO SECTION ==================== -->
+  <section id="hero" class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Hero Text Content (7 cols) -->
+        <div class="lg:col-span-7 space-y-7 text-right">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-card border border-cyan-500/30 text-xs font-semibold text-cyan-300">
+            <span class="pulse-dot"></span>
+            <span>RHYNO / ENTERPRISE RESOURCE PLANNING</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight tracking-tight">
+            مرکز فرماندهی یکپارچه برای <br class="hidden sm:inline">
+            <span class="text-gradient">مالی، منابع انسانی، قراردادها و عملیات سازمان</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-light">
+            راینو تمام جریان‌های حیاتی سازمان را از ثبت فاکتور و اسناد تا مدیریت کارکنان، انبار، قرارداد و مالیات در یک پورتال فارسی و یکپارچه گرد هم می‌آورد. تصمیم‌گیری سریع‌تر، کنترل دقیق‌تر و اجرای امن‌تر فرآیندها را بدون پراکندگی داده ممکن می‌کند.
+          </p>
+
+          <!-- 4 Main CTA Buttons -->
+          <div class="flex flex-wrap gap-3.5 pt-2">
+            <button onclick="openDemoModal()" class="px-6 py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/35 hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2 text-sm">
+              <i data-lucide="sparkles" class="w-4 h-4 text-slate-950"></i>
+              <span>درخواست دموی رایگان</span>
+            </button>
+            <a href="#modules" class="px-5 py-3.5 rounded-xl font-semibold text-slate-200 glass-card hover:border-cyan-400/50 hover:text-white hover:bg-slate-800/50 transition-all text-sm flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-cyan-400"></i>
+              <span>مشاهده ماژول‌ها</span>
+            </a>
+            <button onclick="openDemoModal()" class="px-5 py-3.5 rounded-xl font-semibold text-slate-300 border border-slate-700/80 hover:border-slate-500 hover:text-white transition-all text-sm flex items-center gap-2">
+              <i data-lucide="phone-call" class="w-4 h-4 text-emerald-400"></i>
+              <span>دریافت مشاوره استقرار</span>
+            </button>
+            <button onclick="openDemoModal()" class="px-5 py-3.5 rounded-xl font-semibold text-slate-300 border border-slate-700/80 hover:border-slate-500 hover:text-white transition-all text-sm flex items-center gap-2">
+              <i data-lucide="log-in" class="w-4 h-4 text-blue-400"></i>
+              <span>ورود به پنل راینو</span>
+            </button>
+          </div>
+
+          <!-- Feature badges line -->
+          <div class="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>پشتیبانی کامل از تقویم و مدل‌های مالیاتی ایران</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>معماری چندمستاجری (Multi-Tenant)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>احراز هویت دومرحله‌ای MFA و تفکیک وظایف SoD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual / Showcase Graphic (5 cols) -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <!-- Glow background orb -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-emerald-500/20 rounded-3xl blur-2xl opacity-70"></div>
+            
+            <!-- Main Hero Card Preview -->
+            <div class="relative glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-2xl space-y-5">
+              <!-- Window top bar -->
+              <div class="flex items-center justify-between border-b border-slate-800/90 pb-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                </div>
+                <div class="text-[11px] font-mono text-slate-400 bg-slate-900/90 px-3 py-1 rounded-md border border-slate-800">
+                  rhyno-erp.core.enterprise
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-emerald-400">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span class="text-[11px] font-medium">پایدار و متصل</span>
+                </div>
+              </div>
+
+              <!-- Interactive Mockup Widget 1 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-white flex items-center gap-2">
+                    <i data-lucide="cpu" class="w-4 h-4 text-cyan-400"></i>
+                    موتور هوش مصنوعی و OCR راینو
+                  </span>
+                  <span class="text-[10px] text-cyan-300 font-mono bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800">Tesseract OCR Active</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <div class="text-slate-400">تشخیص صورتحساب:</div>
+                    <div class="text-emerald-400 font-bold mt-0.5">۹۹.۸٪ دقت فیلدها</div>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <div class="text-slate-400">سامانه مؤدیان:</div>
+                    <div class="text-cyan-400 font-bold mt-0.5">همگام‌سازی بلادرنگ</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Mockup Widget 2 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-2.5">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-white flex items-center gap-2">
+                    <i data-lucide="git-branch" class="w-4 h-4 text-emerald-400"></i>
+                    گردش‌کار و کارتابل سازمانی (SLA Engine)
+                  </span>
+                  <span class="text-[10px] text-emerald-400 font-mono">React Flow Graph</span>
+                </div>
+                <div class="space-y-2 text-[11px]">
+                  <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/70 border border-slate-800/60">
+                    <span class="text-slate-300">تأیید فاکتور تجاری #۱۰۸۴</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px]">تأیید خودکار مدیر</span>
+                  </div>
+                  <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/70 border border-slate-800/60">
+                    <span class="text-slate-300">درخواست مرخصی کارشناس مالی</span>
+                    <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px]">در انتظار اقدام (SLA: 2h)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Floating Badge -->
+              <div class="p-3 rounded-xl bg-gradient-to-r from-blue-950/90 to-cyan-950/90 border border-blue-500/30 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="shield-check" class="w-5 h-5 text-cyan-400"></i>
+                  <div>
+                    <div class="font-bold text-white">تفکیک وظایف و کنترل چند دیتابیسی</div>
+                    <div class="text-[10px] text-slate-400">7 Multi-DbContext + EF Core 8</div>
+                  </div>
+                </div>
+                <span class="text-emerald-400 font-bold text-xs font-mono">SECURE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <!-- ==================== 4 KEY METRICS / STATS ==================== -->
+      <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="glass-card glass-card-hover rounded-2xl p-5 border border-cyan-500/20 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-3xl font-black text-white font-mono">۲۰+</span>
+            <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+              <i data-lucide="layout-grid" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <h4 class="text-sm font-bold text-slate-200 mt-2">ماژول عملیاتی و مدیریتی</h4>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">پوشش جامع چرخه مالی، انبار، قراردادها، پرسنلی، اتوماسیون اداری و سامانه مؤدیان</p>
+        </div>
+
+        <div class="glass-card glass-card-hover rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-3xl font-black text-white font-mono">۷</span>
+            <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <i data-lucide="code-2" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <h4 class="text-sm font-bold text-slate-200 mt-2">زبان و فناوری کلیدی</h4>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">در لایه‌های برنامه، رابط کاربری مدرن، وب هوشمند و زیرساخت توزیع‌شده سازمانی</p>
+        </div>
+
+        <div class="glass-card glass-card-hover rounded-2xl p-5 border border-emerald-500/20 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-3xl font-black text-white font-mono">۷۹</span>
+            <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <i data-lucide="git-commit" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <h4 class="text-sm font-bold text-slate-200 mt-2">مسیر و نقطه تعامل شناسایی‌شده</h4>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">نقاط تعامل یکپارچه برای وب و API نسخه‌گذاری‌شده جهت یکپارچه‌سازی حداکثری</p>
+        </div>
+
+        <div class="glass-card glass-card-hover rounded-2xl p-5 border border-purple-500/20 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-purple-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-black text-white">OCR + SQL</span>
+            <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <i data-lucide="server" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <h4 class="text-sm font-bold text-slate-200 mt-2">گردش‌کار، امضا و چندمستاجری</h4>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">پشتیبانی کامل از امضای دیجیتال، موتور پایگاه داده SQL Server و عایق‌سازی داده</p>
+        </div>
+
+      </div>
+
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- ANIMATION (CSS Lottie-like placeholder)    -->
-  <!-- ========================================== -->
-  <div class="animation-container fade-in-up" style="animation-delay: 0.4s">
-    <div style="position:relative;width:100%;max-width:400px;margin:0 auto">
-      <canvas id="lottieCanvas" width="800" height="600" style="width:100%;height:auto"></canvas>
-    </div>
-  </div>
+  <!-- ==================== 3. KEY HIGHLIGHTS / VALUE PROPOSITIONS ==================== -->
+  <section id="highlights" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>VALUE PROPOSITIONS</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          ۸ مزیت رقابتی کلیدی <span class="text-gradient">راینو ERP</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          از داده خام تا تصمیم اجرایی؛ هر لایه از سامانه راینو برای پاسخگویی به چالش‌های واقعی و مقیاس‌پذیری سازمان‌های پیشرو طراحی شده است.
+        </p>
+      </div>
 
-  <!-- ========================================== -->
-  <!-- TRUSTED LOGOS (Ticker)                     -->
-  <!-- ========================================== -->
-  <section class="logos-section fade-in-up" style="animation-delay: 0.5s">
-    <div class="container">
-      <p>مورد اعتماد با استفاده از مدل‌های پیشرو</p>
-      <div class="logo-ticker">
-        <div class="logo-ticker-inner" id="logoScroller">
-          <!-- Filled by JS -->
+      <!-- 8 Highlights Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="highlightsContainer">
+        <!-- Dynamically Populated -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 4. INTERACTIVE MODULE EXPLORER (15 MODULES) ==================== -->
+  <section id="modules" class="py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>INTERACTIVE MODULE EXPLORER</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          کاوشگر تعاملی <span class="text-gradient">۱۵ ماژول جامع و تخصصی راینو</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          تمام ریزامکانات، کاربردهای تجاری و مسیرهای شاخص فنی هر یک از ۱۵ ماژول را بدون خلاصه کردن بررسی کنید.
+        </p>
+      </div>
+
+      <!-- Main Explorer Layout: Left (Desktop Sidebar) + Right (Detailed View) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Module Select Sidebar (4 cols) -->
+        <div class="lg:col-span-4 glass-card rounded-2xl p-3 border border-slate-800 max-h-[750px] overflow-y-auto space-y-1.5" id="moduleSidebar">
+          <!-- Populated by JS for all 15 modules -->
+        </div>
+
+        <!-- Right: Active Module Detailed Content (8 cols) -->
+        <div class="lg:col-span-8 glass-card rounded-2xl p-6 sm:p-8 border border-cyan-500/30 relative min-h-[600px]" id="moduleContentArea">
+          <!-- Populated by renderModuleDetail() -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 5. TECHNICAL & SECURITY ARCHITECTURE ==================== -->
+  <section id="tech" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>TECHNICAL & SECURITY ARCHITECTURE</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          مهندسی‌شده برای <span class="text-gradient">اعتماد، پایداری و امنیت سازمانی</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          معماری لایه‌ای مدرن مبتنی بر دات‌نت، عایق‌سازی چندسطحی پایگاه‌داده و استانداردهای سخت‌گیرانه دسترسی.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Tech Stacks (7 cols) -->
+        <div class="lg:col-span-7 space-y-4" id="techStackContainer">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Defense in Depth & Security (5 cols) -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-7 border border-blue-500/30 space-y-6">
+          <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+            <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">زنجیره دفاع در عمق (Defense in Depth)</h3>
+              <p class="text-xs text-slate-400">پوشش چندلایه از شبکه تا فیلدهای حساس دیتابیس</p>
+            </div>
+          </div>
+
+          <div class="space-y-3.5 text-xs text-slate-300">
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <i data-lucide="key" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="text-white block mb-0.5">هویت و احراز دسترسی:</strong>
+                <span>ASP.NET Identity، احراز دومرحله‌ای MFA/TOTP، کدهای بازیابی، مدیریت ضد جعل فرم و توکن‌های امنیتی.</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <i data-lucide="shield" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="text-white block mb-0.5">کنترل دسترسی پیشرفته (ABAC & SoD):</strong>
+                <span>مجوزهای سفارشی PermissionAuthorize، کنترل Query، ماسک کردن داده‌های حساس و تفکیک وظایف سازمانی.</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <i data-lucide="file-check" class="w-4 h-4 text-purple-400 mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="text-white block mb-0.5">حسابرسی کامل و SIEM:</strong>
+                <span>ثبت خودکار رویدادها با Audit SaveChanges Interceptor، ردیابی تغییرات در سطح فیلد و خروجی لاگ‌های SIEM.</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <i data-lucide="activity" class="w-4 h-4 text-amber-400 mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="text-white block mb-0.5">قابلیت اطمینان و صف رویدادها:</strong>
+                <span>صف پیام RabbitMQ، الگوی Outbox Publisher، صف پیام‌های خطا (Dead Letter) و SignalR برای تبادل آنی.</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <i data-lucide="bot" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="text-white block mb-0.5">هوش مصنوعی ایمن (Secure AI):</strong>
+                <span>کنترل ایمنی کوئری‌های SQL، خواندن امن اسکیمای SQL Server، پلن اجرایی محدود و اعتبارسنجی خروجی.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 6. UI/UX STRENGTHS ==================== -->
+  <section id="ui-ux" class="py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>UI / UX & USER EXPERIENCE</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          طراحی فارسی، روان و <span class="text-gradient">بدون اصطکاک</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          تجربه کاربری منحصربه‌فرد با انطباق کامل بر الزامات اداری و استانداردهای مدرن فرانت‌اند بدون وابستگی به فریم‌ورک‌های سنگین قدیمی.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="uxCardsContainer">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 7. INTERACTIVE FEATURE MATRIX WITH LIVE SEARCH ==================== -->
+  <section id="matrix" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>LIVE FEATURE MATRIX</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          ماتریس تعاملی و <span class="text-gradient">جست‌وجوی زنده امکانات</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          بیش از ۵۰ قابلیت و ماژول را با فیلتر آنی بر اساس کلمات کلیدی (مثل OCR، بیمه، امضا)، دسته‌بندی کاربری و نوع عملیات جستجو کنید.
+        </p>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 mb-6 flex flex-col md:flex-row gap-4 items-center">
+        
+        <!-- Live Search Input -->
+        <div class="relative flex-1 w-full">
+          <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="matrixSearch" 
+            placeholder="جستجوی زنده (مثلاً: OCR، بیمه، امضا، مؤدیان، فاکتور، حقوق، تراز...)" 
+            class="w-full pr-11 pl-4 py-3 bg-slate-900/90 text-slate-100 placeholder-slate-500 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium transition-colors"
+          >
+        </div>
+
+        <!-- User Role Filter -->
+        <div class="w-full md:w-56">
+          <select id="userRoleFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
+            <option value="">همه دسته‌های کاربر</option>
+            <option value="مدیر">مدیر</option>
+            <option value="حسابدار">حسابدار / مدیر مالی</option>
+            <option value="کارمند">کارمند / منابع انسانی</option>
+            <option value="انباردار">انباردار / مدیر انبار</option>
+            <option value="ممیز">ممیز مالیاتی</option>
+            <option value="مدیر سیستم">مدیر سیستم / ادمین</option>
+            <option value="عمومی">عمومی مجاز</option>
+          </select>
+        </div>
+
+        <!-- Feature Kind Filter -->
+        <div class="w-full md:w-48">
+          <select id="featureKindFilter" class="w-full px-3.5 py-3 bg-slate-900/90 text-slate-200 rounded-xl border border-slate-700/80 focus:outline-none focus:border-cyan-400 text-sm font-medium cursor-pointer">
+            <option value="">همه انواع قابلیت</option>
+            <option value="ابزار">ابزار عملیاتی</option>
+            <option value="گردش‌کار">گردش‌کار (Workflow)</option>
+            <option value="گزارش">گزارش و تحلیل</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Feature Count & Reset -->
+      <div class="flex items-center justify-between px-2 mb-3 text-xs text-slate-400">
+        <span id="matrixResultsCount">در حال بارگذاری جدول...</span>
+        <button id="resetMatrixFilter" class="text-cyan-400 hover:text-cyan-300 underline text-xs hidden">پاک کردن فیلترها</button>
+      </div>
+
+      <!-- Matrix Table Container -->
+      <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-sm">
+            <thead class="bg-slate-900/95 text-slate-300 font-bold border-b border-slate-800 text-xs">
+              <tr>
+                <th class="py-4 px-5">نام امکان</th>
+                <th class="py-4 px-5">ماژول مربوطه</th>
+                <th class="py-4 px-5">دسته کاربر</th>
+                <th class="py-4 px-5">نوع قابلیت</th>
+              </tr>
+            </thead>
+            <tbody id="matrixTableBody" class="divide-y divide-slate-800/60 text-slate-300 text-xs sm:text-sm">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 8. FAQ ACCORDION ==================== -->
+  <section id="faq" class="py-20 border-t border-slate-800/80 bg-slate-950/40 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>FAQ ACCORDION</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+          پاسخ به پرسش‌های <span class="text-gradient">متداول سازمان‌ها</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+          پاسخ به سوالات کلیدی پیرامون امنیت، چندمستاجری، استقرار، مالیات و هوش مصنوعی در راینو ERP.
+        </p>
+      </div>
+
+      <!-- Accordion items container -->
+      <div class="space-y-4" id="faqAccordionContainer">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 9. CTA BANNER & FOOTER ==================== -->
+  <section class="py-16 border-t border-slate-800/80 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-card rounded-3xl p-8 sm:p-12 border border-cyan-500/30 text-center relative overflow-hidden">
+        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500/10 via-blue-600/10 to-emerald-500/10 rounded-3xl blur-xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-bold text-emerald-400">
+            <span>آماده ارتقا و یکپارچه‌سازی سازمان خود هستید؟</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
+            سازمان خود را به نسل بعدی مدیریت یکپارچه متصل کنید
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+            از پیکربندی و مهاجرت داده تا آموزش و استقرار کامل، متخصصان فنی راینو در تمام مراحل در کنار شما هستند.
+          </p>
+          <div class="pt-2 flex flex-wrap justify-center gap-4">
+            <button onclick="openDemoModal()" class="px-7 py-4 rounded-xl font-extrabold text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all text-sm flex items-center gap-2">
+              <span>شروع گفت‌وگو و دریافت دمو</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <a href="#modules" class="px-6 py-4 rounded-xl font-bold text-slate-200 glass-card hover:bg-slate-800/60 hover:text-white transition-all text-sm flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4 text-cyan-400"></i>
+              <span>مطالعه مستندات ماژول‌ها</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- FEATURES                                   -->
-  <!-- ========================================== -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2 class="section-title">
-        چرا <span dir="ltr">Rhyno AI</span> بهترین انتخاب است؟
-      </h2>
+  <!-- Footer -->
+  <footer class="border-t border-slate-900 bg-slate-950/80 py-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+        
+        <!-- Col 1: Brand -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-black font-mono">R</div>
+            <span class="text-base font-extrabold text-white">راینو ERP</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            سیستم برنامه‌ریزی منابع سازمانی مدرن با رویکرد اتوماسیون داده، امنیت چندلایه و انطباق کامل با نظام مالیاتی و حقوقی ایران.
+          </p>
+        </div>
 
-      <div class="features-grid" id="featuresGrid">
-        <!-- Filled by JS -->
+        <!-- Col 2: Quick Links -->
+        <div class="space-y-2.5">
+          <h4 class="text-sm font-bold text-slate-200">بخش‌های وب‌سایت</h4>
+          <ul class="space-y-2">
+            <li><a href="#hero" class="hover:text-cyan-400 transition-colors">صفحه اصلی (Hero)</a></li>
+            <li><a href="#highlights" class="hover:text-cyan-400 transition-colors">مزایای رقابتی</a></li>
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">ماژول‌های ۱۵گانه</a></li>
+            <li><a href="#tech" class="hover:text-cyan-400 transition-colors">معماری فنی و امنیت</a></li>
+            <li><a href="#matrix" class="hover:text-cyan-400 transition-colors">ماتریس امکانات</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Modules list summary -->
+        <div class="space-y-2.5">
+          <h4 class="text-sm font-bold text-slate-200">ماژول‌های شاخص</h4>
+          <ul class="space-y-2">
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">داشبورد و هوش مصنوعی</a></li>
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">منابع انسانی و حقوق و دستمزد</a></li>
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">حسابداری و سامانه مؤدیان</a></li>
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">ورود هوشمند OCR فاکتور</a></li>
+            <li><a href="#modules" class="hover:text-cyan-400 transition-colors">مدیریت قرارداد و کارتابل</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Technology & Support -->
+        <div class="space-y-2.5">
+          <h4 class="text-sm font-bold text-slate-200">فناوری و زیرساخت</h4>
+          <div class="space-y-2 text-slate-400">
+            <p>ASP.NET Core · EF Core 8</p>
+            <p>Multi-DbContext SQL Server</p>
+            <p>Tesseract OCR · React Flow</p>
+            <p>RabbitMQ · SignalR · ABAC Security</p>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
 
-  <!-- ========================================== -->
-  <!-- PRICING                                    -->
-  <!-- ========================================== -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-      <div class="pricing-card fade-in-up">
-        <h3>پلن دسترسی کامل</h3>
-        <p>
-          همه ابزارها، همیشه و بدون محدودیت، با پلن
-          <span style="position:relative;cursor:help;font-weight:500;color:hsl(var(--foreground))">
-            pay as you go
-            <span style="position:absolute;bottom:100%;left:50%;margin-bottom:0.5rem;transform:translateX(-50%);width:max-content;background:hsl(var(--secondary));padding:0.25rem 0.75rem;border-radius:0.5rem;font-size:0.75rem;color:hsl(var(--foreground));opacity:0;transition:opacity 0.2s;white-space:nowrap"
-                  onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
-              در این پلن فقط به اندازه استفاده‌تون پرداخت می‌کنید
-            </span>
-          </span>
-        </p>
-        <p class="pricing-price">
-          برای اطلاعات بیشتر از تعرفه‌ها روی دکمه زیر کلیک کنید
-        </p>
-        <a href="/checkout" class="pricing-btn small">تهیه اشتراک و شروع استفاده</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- FOOTER                                     -->
-  <!-- ========================================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; <span id="year"></span>. تمامی حقوق محفوظ است.</p>
-      <div class="enamad-seal">
-        <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT">
-          <img referrerpolicy="origin" src="https://trustseal.enamad.ir/logo.aspx?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT" alt="نماد اعتماد الکترونیکی" style="cursor:pointer;width:125px;height:125px;" />
-        </a>
+      <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© <span id="currentYear"></span> راینو ERP — تمام حقوق و مستندات محفوظ است.</p>
+        <div class="flex items-center gap-4">
+          <span>طراحی شده بر اساس سند شوکیس راینو</span>
+          <span>·</span>
+          <span>نسخه سازمانی ۳.۱</span>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- ==================== DEMO REQUEST MODAL ==================== -->
+  <div id="demoModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md p-4 sm:p-6 overflow-y-auto flex items-center justify-center">
+    <div class="relative w-full max-w-xl glass-card rounded-3xl p-6 sm:p-8 border border-cyan-500/40 shadow-2xl animate-module-content">
+      
+      <!-- Close Button -->
+      <button onclick="closeDemoModal()" class="absolute left-6 top-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors" aria-label="بستن پنجره">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-2 mb-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-400">
+          <span>FREE DEMO REQUEST</span>
+        </div>
+        <h3 class="text-2xl font-black text-white">درخواست دموی رایگان راینو ERP</h3>
+        <p class="text-xs sm:text-sm text-slate-300">
+          مشخصات سازمان خود را وارد کنید تا کارشناسان فنی راینو برای تنظیم جلسه دموی آنلاین یا حضوری با شما تماس بگیرند.
+        </p>
+      </div>
+
+      <!-- Modal Form -->
+      <form id="demoForm" class="space-y-4" onsubmit="handleDemoSubmit(event)">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">نام و نام خانوادگی <span class="text-rose-400">*</span></label>
+            <input type="text" required placeholder="مثال: سهراب حسینی" class="w-full px-3.5 py-2.5 bg-slate-900/90 text-slate-100 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-400 text-xs sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">نام سازمان یا شرکت <span class="text-rose-400">*</span></label>
+            <input type="text" required placeholder="مثال: گروه صنعتی پیشرو" class="w-full px-3.5 py-2.5 bg-slate-900/90 text-slate-100 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-400 text-xs sm:text-sm">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">شماره تماس مستقیم <span class="text-rose-400">*</span></label>
+            <input type="tel" dir="ltr" required placeholder="0912..." class="w-full px-3.5 py-2.5 bg-slate-900/90 text-slate-100 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-400 text-xs sm:text-sm text-right">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">ماژول‌های مورد نیاز</label>
+            <select class="w-full px-3.5 py-2.5 bg-slate-900/90 text-slate-100 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-400 text-xs sm:text-sm">
+              <option>پکیج کامل سازمانی (همه ۱۵ ماژول)</option>
+              <option>ماژول‌های مالی، حسابداری و مؤدیان</option>
+              <option>ماژول‌های منابع انسانی و حقوق و دستمزد</option>
+              <option>ماژول‌های قرارداد، تعهدات و امضای دیجیتال</option>
+              <option>ماژول‌های انبار، کالا و بازرگانی</option>
+              <option>ورود هوشمند OCR و اتوماسیون اداری</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">توضیحات تکمیلی یا نیازهای خاص سازمان</label>
+          <textarea rows="3" placeholder="تعداد پرسنل، سیستم‌های فعلی یا زمان‌بندی مد نظر برای استقرار..." class="w-full px-3.5 py-2.5 bg-slate-900/90 text-slate-100 rounded-xl border border-slate-700 focus:outline-none focus:border-cyan-400 text-xs sm:text-sm"></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 shadow-lg shadow-cyan-500/25 transition-all text-sm flex items-center justify-center gap-2">
+            <span>ثبت نهایی درخواست و دریافت کاتالوگ</span>
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div id="demoSuccessAlert" class="hidden p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-medium">
+          درخواست شما با موفقیت ثبت گردید. کارشناسان ما حداکثر ظرف ۲ ساعت کاری با شما تماس خواهند گرفت.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT DATA & LOGIC ==================== -->
+  <script>
+    /* ========================================================
+       1. DATA: 8 KEY HIGHLIGHTS
+       ======================================================== */
+    const highlightsData = [
+      {
+        icon: 'network',
+        title: 'یکپارچگی کامل فرآیندها',
+        desc: 'اتصال مستقیم مالی، منابع انسانی، قرارداد، انبار، مکاتبات، اسناد و مالیات بدون جزیره‌ای شدن داده‌ها.'
+      },
+      {
+        icon: 'bar-chart-3',
+        title: 'داشبوردهای تصمیم‌ساز',
+        desc: 'نماهای مدیریتی و هوشمند برای مدیرعامل، مدیر مالی، قراردادها، انبار، حسابرسی و کارشناسان مالیاتی.'
+      },
+      {
+        icon: 'scan-text',
+        title: 'اتوماسیون هوشمند اسناد و فاکتور',
+        desc: 'OCR قدرتمند فارسی، تشخیص خودکار موجودیت، نرمال‌سازی ارز و تاریخ جلالی با تبدیل مستقیم به اسناد مالی.'
+      },
+      {
+        icon: 'git-merge',
+        title: 'گردش‌کار قابل طراحی و ردیابی',
+        desc: 'فرم‌های تصمیم، تأیید، رد، واگذاری، کنترل SLA، تشدید خودکار و Workflow Builder با نمودار React Flow.'
+      },
+      {
+        icon: 'receipt',
+        title: 'کنترل مالی و مالیاتی بومی ایران',
+        desc: 'محاسبه ارزش افزوده، گزارش فصلی ماده ۱۶۹، ارسال به سامانه مؤدیان، تطبیق صورتحساب‌ها و لاگ ممیزی.'
+      },
+      {
+        icon: 'shield-check',
+        title: 'امنیت سازمانی چندلایه',
+        desc: 'مدیریت نقش و مجوز، ABAC، ایزولاسیون داده، تفکیک وظایف (SoD)، ماسک فیلدهای حساس، MFA و لاگ حسابرسی.'
+      },
+      {
+        icon: 'smartphone',
+        title: 'تجربه کاربری فارسی و واکنش‌گرا',
+        desc: 'راست‌چین ۱۰۰٪، فونت وزیرمتن، تب‌های پویا، جدول‌های حرفه‌ای، جست‌وجوی سریع و تعاملات AJAX بدون رفرش.'
+      },
+      {
+        icon: 'plug-2',
+        title: 'آماده اتصال به اکوسیستم سازمان',
+        desc: 'REST API نسخه‌گذاری‌شده v1، وب‌هوک‌های دوطرفه، صف RabbitMQ/Outbox، اتصال مستقیم به دیتابیس و گزارش‌ساز هوشمند.'
+      }
+    ];
+
+    /* ========================================================
+       2. DATA: 15 FULL DETAILED MODULES (EXACT DATA FROM DOC)
+       ======================================================== */
+    const modulesData = [
+      {
+        id: '3.1',
+        name: 'داشبورد مرکزی و مدیریت سازمان',
+        icon: 'layout-dashboard',
+        summary: 'صفحه خانه، داشبورد مدیریت و نماهای تحلیلی برای نمایش KPI، کارهای معوق، سررسید فاکتورها، وضعیت فرآیندها و سلامت اتصال‌ها.',
+        value: 'مدیر به‌جای جمع‌آوری دستی اطلاعات، تصویر واحدی از وضعیت عملیات، ریسک‌ها، سررسیدها و عملکرد سازمان دریافت می‌کند.',
+        features: [
+          'صفحه خانه و داشبورد عملیاتی با کارت‌های خلاصه، اقدامات سریع و کارهای در انتظار.',
+          'داشبورد مدیریت: نمای کلی، وضعیت اتصال‌ها، ذخیره و حذف اتصال بانک اطلاعاتی، آزمون اتصال.',
+          'ساخت گزارش از متن کاربر با AI، خواندن اسکیمای SQL Server، تولید پلن SQL محدود و نمایش داده‌های دو ستونه.',
+          'داشبوردهای اختصاصی مالی، قرارداد، انبار، حسابرسی، فاکتور و منابع انسانی.',
+          'داشبورد تحلیل فرآیند با نمودار داده و خروجی Excel.'
+        ],
+        endpoints: [
+          'Home/Index (Operational Dashboard)',
+          'Management/Dashboard (KPI & Overview)',
+          'Management/Connections/Save',
+          'Management/Connections/Delete',
+          'Management/Connections/Test',
+          'AI SQL Report Generator / Schema Introspection',
+          'Dashboards: Finance / Contract / Inventory / HR',
+          'Process Analytics / Excel Export'
+        ]
+      },
+      {
+        id: '3.2',
+        name: 'منابع انسانی و سرمایه انسانی',
+        icon: 'users',
+        summary: 'پرونده جامع کارکنان و چرخه عمر استخدام، وضعیت شغلی، حقوق، قرارداد منابع انسانی، مرخصی، وام، حضور و غیاب و بیمه.',
+        value: 'کاهش خطای منابع انسانی، نگهداری تاریخچه قابل استناد کارکنان و کوتاه‌کردن زمان پردازش حقوق، بیمه و مرخصی.',
+        features: [
+          'فهرست کارکنان با فیلتر، جست‌وجوی سریع، ایجاد، ویرایش، جزئیات، حذف و خروجی Excel.',
+          'پرونده پرسنلی شامل کد پرسنلی، کد ملی، تاریخ تولد، تاریخ استخدام، دپارتمان، سمت و وضعیت.',
+          'کنترل یکتایی کد پرسنلی و کد ملی و اعتبارسنجی ترتیب تاریخ‌های تولد، استخدام و پایان قرارداد.',
+          'تاریخ‌های شمسی/میلادی با نرمال‌سازی و تبدیل تاریخ جلالی.',
+          'تاریخچه حقوق و ثبت افزایش حقوق؛ تاریخچه تغییر وضعیت و تایم‌لاین پرونده.',
+          'قرارداد کارکنان: فهرست، ایجاد و اتصال به شخص و وضعیت استخدامی.',
+          'مرخصی کارکنان: ثبت، فهرست، جزئیات، ویرایش، حذف، تأیید و رد با گردش‌کار.',
+          'وام کارکنان: ثبت، فهرست و مدیریت اطلاعات وام.',
+          'حضور و غیاب: ثبت رویداد، فهرست و جزئیات داده‌های حضور.',
+          'گزارش‌های منابع انسانی و خروجی اطلاعات کارکنان.',
+          'بیمه: فهرست بیمه ماهانه، ایجاد، ویرایش، جزئیات، حذف، ثبت AJAX، کپی از ماه قبل، انتخاب کارکنان، وضعیت‌ها و پردازش تاریخ شمسی.',
+          'کارفرماها: فهرست، جست‌وجو، ایجاد، ویرایش و حذف.',
+          'دپارتمان‌ها: فهرست و ایجاد.'
+        ],
+        endpoints: [
+          'HumanCapital/Index, Create, Edit, Details',
+          'HumanCapital/Contracts, CreateContract',
+          'HumanCapital/Leaves, CreateLeave',
+          'HumanCapital/Loans, CreateLoan',
+          'HumanCapital/Attendance, CreateAttendance',
+          'HumanCapital/Reports, ExportExcel, SearchEmployees',
+          'Bimeh/Index, SaveInsuranceAjax, CopyFromPreviousMonth',
+          'Bimeh/GetEmployees, GetEmployeeById',
+          'REST API: /api/v1/employees',
+          'REST API: /api/v1/leaves & create leave'
+        ]
+      },
+      {
+        id: '3.3',
+        name: 'حقوق و دستمزد',
+        icon: 'wallet-cards',
+        summary: 'ایجاد لیست حقوق، محاسبه، کنترل کیفیت، ذخیره، جزئیات، چاپ فیش و خروجی گروهی.',
+        value: 'استانداردسازی محاسبه حقوق، کاهش خطای ورود دستی و ایجاد سند پرداخت قابل چاپ و گزارش‌گیری.',
+        features: [
+          'فهرست حقوق بر اساس ماه، سال و کارمند؛ ایجاد لیست دوره‌ای.',
+          'ویرایش و مشاهده جزئیات لیست و اقلام حقوق.',
+          'محاسبه حقوق از طریق درخواست JSON، نمایش هشدارهای کیفیت و خلاصه تغییرات.',
+          'ذخیره نتیجه محاسبه و کنترل دسترسی مالی.',
+          'جست‌وجوی کارکنان و دریافت کارمند با شناسه.',
+          'خروجی Excel لیست حقوق، خروجی گروهی فیش‌ها و مسیرهای PDF پیش‌بینی‌شده.',
+          'چاپ فیش حقوقی و اتصال به خروجی‌های مالی.'
+        ],
+        endpoints: [
+          'Payroll/Index (ماهانه و سالانه)',
+          'Payroll/Create & Edit',
+          'Payroll/Details',
+          'Payroll/Calculate (JSON Action & Quality Warnings)',
+          'Payroll/Save & Access Control',
+          'Payroll/SearchEmployees, GetEmployeeById',
+          'Payroll/ExportExcel',
+          'Payroll/BulkPayslips & Print Payslip (PDF)'
+        ]
+      },
+      {
+        id: '3.4',
+        name: 'حسابداری، خزانه و مالی',
+        icon: 'landmark',
+        summary: 'هسته مالی شامل فاکتور، حساب‌ها، اسناد حسابداری، دفتر، تراز آزمایشی، دوره مالی، ارز و بستن حساب‌ها.',
+        value: 'ایجاد دفتر مالی منسجم، کنترل چرخه عمر سند، تسریع گزارش‌دهی و آماده‌سازی داده برای حسابرسی و اظهارنامه.',
+        features: [
+          'فهرست فاکتورهای فروش و خرید با فیلتر و کنترل شماره فاکتور.',
+          'ایجاد، ویرایش، تأیید، رد و حذف فاکتور با مجوزهای مجزا.',
+          'داشبورد مالی و داشبورد ارزش افزوده؛ گزارش فصلی مالیات و هاب گزارش‌گیری.',
+          'درخت و فهرست تخت حساب‌ها، ایجاد حساب گروه، کل، معین و تفصیلی، ویرایش و کنترل کد تکراری.',
+          'مشاهده گردش حساب تفصیلی، جست‌وجوی حساب‌های معین و اطلاعات شناور.',
+          'دفتر کل با بازه زمانی، دفتر عملیات و تراز آزمایشی بر اساس دوره مالی.',
+          'ایجاد نرخ ارز و دریافت آخرین نرخ ارز برای تاریخ مشخص.',
+          'ایجاد سند ساده، شماره‌گذاری مجدد اسناد، ثبت/ارسال سند، کپی سند با امکان جابه‌جایی بدهکار و بستانکار.',
+          'تغییر وضعیت سند، برگشت سند با علت و تاریخ، ابطال سند با علت.',
+          'بستن حساب‌های موقت و مدیریت وضعیت دوره مالی.',
+          'دفترهای تکرارشونده و الگوهای ثبت؛ قالب‌های تخصیص و ثبت خودکار تخصیص‌ها.',
+          'خروجی Excel فاکتورها، انبار و حقوق.',
+          'چاپ PDF فاکتور، رسید انبار و فیش حقوقی.'
+        ],
+        endpoints: [
+          'GET /api/v1/finance/vouchers',
+          'GET /api/v1/finance/vouchers/{id}',
+          'POST /api/v1/finance/vouchers',
+          'GET /api/v1/finance/balance-report',
+          'GET/POST/PUT /api/v1/chart-of-accounts (Tree/List/Edit)',
+          'ChartOfAccounts/Turnover & ValidateCode',
+          'GeneralLedger/Index & TrialBalance',
+          'CurrencyRates/Index & GetLatestRate',
+          'Vouchers/Renumber, Copy, Reverse, Cancel'
+        ]
+      },
+      {
+        id: '3.5',
+        name: 'مالیات و سامانه مؤدیان',
+        icon: 'receipt-text',
+        summary: 'محاسبه مالیات، تحلیل روند، هشدار هوشمند، ممیزی و ارسال امن صورتحساب به سامانه مؤدیان.',
+        value: 'کاهش مغایرت مالیاتی، حذف ورود مجدد اطلاعات، پیگیری قابل مشاهده ارسال‌ها و افزایش آمادگی برای ممیزی.',
+        features: [
+          'محاسبه مالیات در سطح فاکتور و خطوط کالا با تفکیک پایه و مالیات.',
+          'داشبورد تحلیل مالیاتی، بینش‌ها، روند مبالغ دوره‌ای و هشدارهای ناهنجاری/ریسک.',
+          'دستیار پرسش‌وپاسخ مالیاتی با زبان طبیعی و داده‌های ساختاریافته.',
+          'جست‌وجوی لاگ ممیزی مالیاتی بر اساس عمل و عبارت جست‌وجو.',
+          'صف ارسال، ارسال دسته‌ای، تلاش مجدد موارد ناموفق و خلاصه وضعیت.',
+          'تطبیق فاکتور با پاسخ سامانه و نمایش مغایرت‌ها.',
+          'ساخت خروجی پرتال، ورود به پرتال، OTP، CAPTCHA OCR، پیگیری پیشرفت کار و دانلود خروجی.',
+          'رمزنگاری/امضای payload، کلاینت واقعی و sandbox سامانه مؤدیان.',
+          'تنظیمات اتصال و پارامترهای مؤدیان.',
+          'API همگام‌سازی فاکتورها و ارسال‌ها و endpoint تأیید دریافت برای ERP.'
+        ],
+        endpoints: [
+          'TaxAnalytics/Insights, Ask, Alerts',
+          'TaxAudit/Search',
+          'Mowadiyan/BatchSend, RetryFailed',
+          'Mowadiyan/RunReconciliation',
+          'Mowadiyan/CreatePortalExport, InitiatePortalLogin',
+          'Mowadiyan/ExportProgress, SaveSettings',
+          'IntegrationWebhook/GetInvoicesForSync',
+          'IntegrationWebhook/GetSubmissionsForSync',
+          'IntegrationWebhook/Acknowledge'
+        ]
+      },
+      {
+        id: '3.6',
+        name: 'ورود هوشمند فاکتور و اتوماسیون دریافت',
+        icon: 'scan-line',
+        summary: 'دریافت فایل و پوشه، استخراج متن و فیلدهای فاکتور، اعتبارسنجی JSON و تبدیل آن به رکورد قابل استفاده در مالیات و حسابداری.',
+        value: 'تبدیل اسناد پراکنده و تصویرمحور به داده ساختاریافته، سریع و قابل حسابرسی با حداقل ورود دستی.',
+        features: [
+          'بارگذاری چند فایل در صفحه ورود فاکتور، مشاهده فهرست جلسات و وضعیت هر فایل.',
+          'پردازش هر سند با OCR، استخراج شماره، تاریخ، فروشنده، خریدار، اقلام، مبالغ و مالیات.',
+          'ویرایش متادیتا پیش از پردازش و حذف ورودی.',
+          'اعتبارسنجی ساختار JSON با مسیر خطا و پیام دقیق.',
+          'تشخیص موجودیت و رفع ابهام معنایی خطوط فاکتور.',
+          'نرمال‌سازی ارز، تاریخ جلالی و طبقه‌بندی اقلام مالیاتی.',
+          'دریافت فایل ZIP و پردازش خودکار آرشیو.',
+          'وب‌هوک فایل، Base64، ZIP و پیام Telegram؛ پشتیبانی از metadata اختیاری.',
+          'نگهداری جلسه در حافظه یا دیتابیس و کنترل مالک جلسه.'
+        ],
+        endpoints: [
+          'InvoiceIntake/Index & Multi-File Upload',
+          'InvoiceIntake/Sessions & Status',
+          'OCR Process / Entity Recognition / JSON Validation',
+          'Normalization: Jalali Date & Currency',
+          'ZIP Archive Auto-Processing',
+          'Webhook Intake: File, Base64, ZIP, Telegram',
+          'Session Persistence & Owner Verification'
+        ]
+      },
+      {
+        id: '3.7',
+        name: 'مدیریت قرارداد و تعهدات',
+        icon: 'file-signature',
+        summary: 'چرخه کامل قرارداد از ایجاد و نسخه‌بندی تا پرداخت، تعهد، امضا، ضمانت، جریمه، آرشیو و تحلیل ارزش.',
+        value: 'جلوگیری از فراموشی سررسید و تعهد، شفاف‌سازی جریان نقدی قرارداد و حفظ سابقه حقوقی تمام نسخه‌ها و امضاها.',
+        features: [
+          'فهرست قراردادها با فیلتر، داشبورد و صفحه جزئیات.',
+          'ایجاد و ویرایش قرارداد با فیلدهای قابل تنظیم، اعتبارسنجی و تاریخچه تغییرات.',
+          'آرشیو، بازگردانی از آرشیو، حذف و اقدامات گروهی.',
+          'مدیریت طرفین، نوع قرارداد، وضعیت چرخه عمر و تمدید خودکار؛ لغو تمدید خودکار و ثبت لاگ.',
+          'تقویم تعهدات و گزارش‌های سن قرارداد/سررسید، درآمد، قیف ارزش، تقویم و مواجهه مالی.',
+          'برنامه پرداخت: تولید اقساط، حذف برنامه، ثبت و حذف پرداخت و وضعیت پرداخت.',
+          'محاسبه جریمه تأخیر، تعریف قاعده جریمه، تغییر وضعیت جریمه و انواع جریمه.',
+          'ضمانت‌نامه: افزودن، ویرایش، آزادسازی، حذف و انواع ضمانت.',
+          'الزامات اسنادی: نمایش چک‌لیست، بررسی تکمیل و ایجاد الزامات پیش‌فرض.',
+          'پیوست‌ها: آپلود، دانلود، حذف، پیش‌نمایش، نسخه‌بندی، شرح تغییر، دانلود نسخه، بازگردانی نسخه و پاک‌سازی orphan.',
+          'تولید سند از قالب، پیش‌نمایش خام/پردازش‌شده، مدیریت قالب، حذف و تعیین قالب پیش‌فرض.',
+          'امضای داخلی، ایجاد درخواست امضا، تولید لینک امضای خارجی و فهرست درخواست‌های امضا.',
+          'گزارش‌ها و خروجی Excel/PDF در سطح قرارداد و گزارش.',
+          'ذخیره ترجیحات ستون و نماهای شخصی.'
+        ],
+        endpoints: [
+          'Contracts/Index, Dashboard, Details, Create, Edit, Archive',
+          'Contracts/Reports: Aging, Revenue, Pipeline, Calendar, Exposure',
+          'Contracts/Schedule, GenerateSchedule, AddPayment',
+          'Contracts/UploadAttachment, GenerateDocument, Settings',
+          'Contracts/SignContract, CreateSignatureRequest',
+          'Controllers: Guarantees, Penalties, Requirements',
+          'Attachment Versioning / Orphan Cleanup',
+          'BulkAction, ExportContracts, ExportReport'
+        ]
+      },
+      {
+        id: '3.8',
+        name: 'بازرگانی، فروش و خرید',
+        icon: 'shopping-cart',
+        summary: 'مدیریت صورتحساب‌های فروش/خرید، برگشت، پیش‌فاکتور، طرف حساب، تسویه و پیوست تجاری.',
+        value: 'کنترل چرخه سفارش تا تسویه و اتصال مستقیم عملیات فروش و خرید به حسابداری و مالیات.',
+        features: [
+          'فهرست فروش و خرید با جست‌وجو، سال، طرف حساب، وضعیت و وضعیت پرداخت.',
+          'جزئیات فاکتور، ثبت/ارسال فاکتور و لغو با علت.',
+          'برگشت فروش و خرید، دریافت خطوط فاکتور، ثبت برگشت و نهایی‌سازی برگشت.',
+          'پیش‌فاکتورهای فروش/خرید، ایجاد، ویرایش محتوای خطوط، ذخیره و تبدیل به فاکتور.',
+          'مدیریت طرفین تجاری: فهرست، ایجاد، ویرایش و فعال/غیرفعال بودن.',
+          'ثبت تسویه فاکتور.',
+          'آپلود، دانلود و حذف پیوست فاکتور.'
+        ],
+        endpoints: [
+          'Commercial/Sales/Index & Details',
+          'Commercial/Purchases/Index & Details',
+          'Commercial/Submit, CancelWithReason',
+          'Commercial/Returns/GetLines, Register, Finalize',
+          'Commercial/Proforma/Create, EditLines, ConvertToInvoice',
+          'Commercial/Parties/Index, Create, Edit, ToggleActive',
+          'Commercial/Settlement/Register',
+          'Commercial/Attachments/Upload, Download, Delete'
+        ]
+      },
+      {
+        id: '3.9',
+        name: 'انبار و موجودی',
+        icon: 'warehouse',
+        summary: 'مدیریت کالا، انبارها، رسید، حواله، انتقال، موجودی، شمارش و بستن دوره انبار.',
+        value: 'جلوگیری از کسری و مازاد، کنترل گردش کالا و ایجاد زنجیره تأییدپذیر از دریافت تا مصرف یا انتقال.',
+        features: [
+          'داشبورد انبار با موجودی، کالاهای کم‌موجودی، اسناد اخیر، انتقال‌های در انتظار، انبارهای پرریسک و روند گردش.',
+          'کالاها: فهرست و جست‌وجو، ایجاد، ویرایش، حذف، فعال/غیرفعال و کنترل کد یکتا.',
+          'انبارها: فهرست، ایجاد، ویرایش، کنترل کد و تعیین مدیر.',
+          'رسید انبار: ایجاد با اقلام، جزئیات، تأیید، رد، لغو و بازگشایی.',
+          'حواله خروج: ایجاد با اقلام، جزئیات، تأیید، رد، لغو و بازگشایی.',
+          'درخواست انتقال بین انبارها: ایجاد، فهرست با فیلتر مبدأ/مقصد/کالا/درخواست‌کننده، جزئیات، تأیید، رد با علت و لغو با علت.',
+          'موجودی و دفتر گردش موجودی؛ نمایش Snapshot و روند حرکت.',
+          'شمارش موجودی: ایجاد، فهرست، جزئیات، تأیید و ثبت مغایرت.',
+          'پیش‌نمایش و اجرای بستن دوره انبار با اقلام کنترل.',
+          'خروجی Excel موجودی و چاپ PDF رسید.',
+          'ثبت رویداد حسابرسی عملیات انبار.'
+        ],
+        endpoints: [
+          'Inventory/Dashboard (LowStock, PendingTransfers, Risks)',
+          'Inventory/Products/Index, Create, Edit, Delete',
+          'Inventory/Warehouses/Index, Create, Edit, AssignManager',
+          'Inventory/Receipts/Create, Details, Approve, Reject, Cancel, Reopen',
+          'Inventory/Issues/Create, Details, Approve, Reject, Cancel, Reopen',
+          'Inventory/Transfers/Create, Filter, Approve, RejectWithReason',
+          'Inventory/StockSnapshot & Ledger',
+          'Inventory/StockCount/Create, Verify, RegisterDiscrepancy',
+          'Inventory/PeriodClose/Preview & Execute',
+          'Inventory/ExportExcel & PrintReceiptPDF'
+        ]
+      },
+      {
+        id: '3.10',
+        name: 'اتوماسیون اداری، مکاتبات و آرشیو اسناد',
+        icon: 'folder-lock',
+        summary: 'مدیریت نامه‌ها، پاسخ‌ها، پیوست‌ها، یادداشت‌ها و آرشیو امن اسناد سازمانی.',
+        value: 'کاهش زمان یافتن سند، جلوگیری از گردش نسخه‌های قدیمی و حفظ محرمانگی نامه‌ها و مستندات.',
+        features: [
+          'نامه‌ها: فهرست، ایجاد، ویرایش، جزئیات، حذف و تأیید.',
+          'پاسخ به نامه و ارتباط نامه اصلی/پاسخ، گیرنده و رونوشت.',
+          'پیوست و یادداشت نامه.',
+          'دستیار AI برای پیش‌نویس، خلاصه‌سازی و تولید پاسخ.',
+          'آرشیو اسناد با جست‌وجو، دسته‌بندی و سطح دسترسی.',
+          'بارگذاری، پیش‌نمایش، دانلود و حذف سند.',
+          'تاریخچه نسخه‌ها، آپلود نسخه جدید، بازگردانی نسخه و دانلود نسخه مشخص.',
+          'خروجی Excel و PDF آرشیو.',
+          'API اسناد برای فهرست، بارگذاری و دانلود.'
+        ],
+        endpoints: [
+          'Letters/Index, Create, Edit, Details, Delete, Approve',
+          'Letters/Reply, LinkToOriginal, Recipients, CC',
+          'Letters/Attachments & Notes',
+          'Letters/AIAssistant: Draft, Summarize, GenerateReply',
+          'DocumentArchive/Index, Categories, AccessLevels',
+          'DocumentArchive/Upload, Preview, Download, Delete',
+          'DocumentArchive/VersionHistory, UploadNewVersion, RevertVersion',
+          'REST API: /api/v1/documents (List, Upload, Download)',
+          'Archive/ExportExcel & ExportPDF'
+        ]
+      },
+      {
+        id: '3.11',
+        name: 'کارتابل و گردش‌کار سازمانی',
+        icon: 'inbox',
+        summary: 'یک نقطه واحد برای مشاهده و پردازش وظایف تأیید، تصمیم‌گیری، واگذاری و ردیابی کار.',
+        value: 'حذف گلوگاه‌های تأیید، قابل اندازه‌گیری‌کردن زمان انجام کار و حفظ مسئولیت‌پذیری هر مرحله.',
+        features: [
+          'کارتابل با فیلتر و فهرست وظایف در انتظار.',
+          'پردازش وظیفه با action، تأیید/رد سند و ثبت تصمیم و نظر.',
+          'عملیات گروهی روی وظایف.',
+          'افزودن نظر معمولی یا نظر همراه با mention و اتصال به گام گردش‌کار.',
+          'واگذاری وظیفه به کاربر دیگر با یادداشت.',
+          'دانلود پیوست گردش‌کار.',
+          'نمای Kanban و تغییر وضعیت کارت.',
+          'ثبت زمان صرف‌شده و شرح فعالیت و مشاهده لاگ زمان.',
+          'SLA، زمان‌بندی، تشدید خودکار و اعلان وظایف نزدیک به سررسید.',
+          'API کارتابل برای دریافت، تأیید و رد وظیفه.',
+          'هاب SignalR برای تعاملات بلادرنگ و اعلان تغییرات.'
+        ],
+        endpoints: [
+          'Inbox/Index (Filter & Pending Tasks)',
+          'Inbox/ProcessTask (Action, Approve, Reject, Comment)',
+          'Inbox/BulkActions (تأیید یا رد گروهی)',
+          'Inbox/AddCommentWithMention',
+          'Inbox/DelegateTask (واگذاری به کاربر دیگر)',
+          'Inbox/KanbanView & MoveCardStatus',
+          'Inbox/TimeLog/Register & ViewLogs',
+          'Workflow/SLAEngine & AutoEscalation',
+          'REST API: /api/v1/workflow/tasks (Get, Approve, Reject)',
+          'SignalR Hub: /hubs/workflowHub (Realtime Notification)'
+        ]
+      },
+      {
+        id: '3.12',
+        name: 'امنیت، هویت و مدیریت دسترسی',
+        icon: 'shield-check',
+        summary: 'هویت، نقش، مجوز، سیاست دسترسی و طراحی مسیرهای تأیید با کنترل‌های امنیتی سازمانی.',
+        value: 'اصل حداقل دسترسی، جداسازی مسئولیت‌ها و امکان اثبات اینکه چه کسی، چه زمانی و چه تغییری انجام داده است.',
+        features: [
+          'ورود، خروج و دریافت مشخصات کاربر جاری از API احراز هویت.',
+          'کاربران: فهرست و ایجاد با اتصال کارمند، مدیر و نقش.',
+          'نقش‌ها: ایجاد، حذف، تغییر نام، فهرست و مدیریت مجوزها.',
+          'ماتریس نقش/مجوز، فهرست کاتالوگ مجوز و پروفایل دسترسی کاربر جاری.',
+          'مجوزهای تفکیک‌شده برای مشاهده، ایجاد، ویرایش، حذف، تأیید، خروجی و تنظیمات هر ماژول.',
+          'ABAC، کنترل Query، ایزولاسیون داده و ماسک‌کردن فیلدهای حساس.',
+          'تفکیک وظایف و قواعد تعارض نقش.',
+          'مدیریت مسیر گردش‌کار و approverها.',
+          'Workflow Builder گرافیکی با دریافت/ذخیره graph و node/edgeهای React Flow.',
+          'تغییر رمز عبور، فعال‌سازی و غیرفعال‌سازی ورود دومرحله‌ای، کد تأیید و recovery codes.',
+          'ثبت کامل رویدادهای حسابرسی و خروجی عادی و SIEM.',
+          'هدرهای امنیتی، ضدجعل فرم، API Key و مدیریت خطای API.'
+        ],
+        endpoints: [
+          'Auth/Login, Logout, GetCurrentUser',
+          'Users/Index, Create, AssignRoles & Managers',
+          'Roles/Index, Create, Delete, Rename, ManagePermissions',
+          'Permissions/MatrixCatalog & UserProfile',
+          'WorkflowBuilder/GetGraph, SaveGraph (React Flow Node/Edge)',
+          'Security/ChangePassword, EnableMFA, VerifyTOTP, RecoveryCodes',
+          'Audit/SearchLogs, ExportSIEMLogs',
+          'Middleware: AntiForgery, SecurityHeaders, ApiKeyHandler'
+        ]
+      },
+      {
+        id: '3.13',
+        name: 'اعلان‌ها و تقویم سازمانی',
+        icon: 'bell-ring',
+        summary: 'مرکز اعلان‌ها و تقویم تجمیعی برای مرخصی، سررسید فاکتور، حقوق و رویدادهای دستی.',
+        value: 'تبدیل سررسید و هشدار از اطلاعات پنهان به اقدام به‌موقع و قابل مشاهده.',
+        features: [
+          'فهرست اعلان با فیلتر شدت، ماژول و وضعیت خوانده‌شدن.',
+          'شمارش خوانده‌نشده، خواندن یک اعلان و خواندن همه.',
+          'دریافت JSON اعلان‌ها برای ویجت‌های زنده.',
+          'تنظیم اشتراک هشدارها به تفکیک ماژول و بروزرسانی اشتراک.',
+          'تقویم ماهانه/سالانه و افزودن رویداد دستی.',
+          'تولید رویداد خودکار از مرخصی‌ها، موعد فاکتورها و حقوق.'
+        ],
+        endpoints: [
+          'Notifications/Index (Severity, Module, ReadStatus)',
+          'Notifications/UnreadCount',
+          'Notifications/MarkAsRead & MarkAllAsRead',
+          'Notifications/GetJsonFeed (Live Widgets)',
+          'Notifications/Subscriptions & UpdateSettings',
+          'Calendar/MonthlyView & YearlyView',
+          'Calendar/AddManualEvent',
+          'Calendar/AutoEvents (Leaves, InvoiceDue, Payroll)'
+        ]
+      },
+      {
+        id: '3.14',
+        name: 'گزارش‌ساز، جست‌وجوی سراسری و نماهای شخصی',
+        icon: 'search-code',
+        summary: 'دسترسی سریع به داده‌ها و ساخت گزارش/نمای مناسب هر کاربر.',
+        value: 'کوتاه‌کردن مسیر رسیدن به داده و شخصی‌سازی میزکار بدون توسعه سفارشی برای هر کاربر.',
+        features: [
+          'جست‌وجوی کامل و جست‌وجوی سریع در نامه‌ها، کارکنان، فاکتورها، کالاها، فروشندگان، بارنامه‌ها و کاربران.',
+          'مرکز گزارش‌ها با کارت خلاصه، بخش، preset و اقدام گزارش.',
+          'خروجی Excel نامه، بارنامه، محصول، فروشنده، افراد، کاربران و بیمه.',
+          'نماهای ذخیره‌شده، ذخیره/حذف نما و layout ستون‌ها و فیلترها.',
+          'ترجیحات جدول و ستون، انتخاب ستون و فیلترهای ماندگار.',
+          'گزارش هوشمند مدیریتی با کنترل امنیت SQL و خروجی داده‌های محدود.'
+        ],
+        endpoints: [
+          'GlobalSearch/Query (Letters, Employees, Invoices, Goods, Vendors)',
+          'ReportsCenter/Index & Presets',
+          'Reports/ExportExcel (Letters, Waybills, Products, Vendors, People, Users, Insurance)',
+          'SavedViews/SaveView, DeleteView, ApplyLayout',
+          'TablePreferences/SaveColumns, PersistFilters',
+          'AISecureReport/ExecuteLimitedPlan'
+        ]
+      },
+      {
+        id: '3.15',
+        name: 'بارنامه، طرف حساب و داده‌های پایه',
+        icon: 'database',
+        summary: 'نگهداری داده‌های پایه و اسناد حمل در کنار مشتری، فروشنده و کارفرما.',
+        value: 'حذف داده‌های تکراری و ایجاد مرجع واحد برای اشخاص، کالاها، حمل و معاملات.',
+        features: [
+          'بارنامه: فهرست و فیلتر، ایجاد، جزئیات، ویرایش، حذف و اتصال به گردش‌کار.',
+          'فروشندگان: فهرست، جست‌وجو، ایجاد، ویرایش و حذف.',
+          'مشتریان و طرف‌های تجاری قابل استفاده در فاکتور و قرارداد.',
+          'بارگذاری داده‌های گروهی با Bulk Import Service.'
+        ],
+        endpoints: [
+          'Waybills/Index, Filter, Details',
+          'Waybills/Create, Edit, Delete, AttachWorkflow',
+          'Vendors/Index, Search, Create, Edit, Delete',
+          'Customers/Index, Search, Create, Edit',
+          'BusinessParties/Index (یکپارچه با فاکتور و قرارداد)',
+          'BaseData/BulkImportService (Excel/CSV Batch Load)'
+        ]
+      }
+    ];
+
+    /* ========================================================
+       3. DATA: TECHNICAL ARCHITECTURE ITEMS
+       ======================================================== */
+    const techItems = [
+      {
+        title: 'C# / ASP.NET Core MVC & Web API',
+        desc: 'معماری چندلایه‌ای تمیز با تفکیک صریح لایه‌های Controller، ViewModel/DTO، Service، Domain و Infrastructure؛ طراحی ماژول‌های کاملاً مستقل برای Finance، Commercial، Inventory، Office، Workflow، Identity، Platform، Invoice Intake، OCR، Tax Engine و Mowadiyan Integration.'
+      },
+      {
+        title: 'Entity Framework Core & SQL Server',
+        desc: 'پیکربندی صریح Entityها، شاخص‌گذاری و بهینه‌سازی کوئری‌ها، و خطوط Migration کامپایل‌شده جداگانه برای هر کانتکست دیتابیس جهت استقرار بدون ریسک.'
+      },
+      {
+        title: 'Multi-DbContext و چندمستاجری (Multi-Tenant)',
+        desc: 'جداسازی کانتکست‌های PlatformDbContext، FinanceDbContext، WorkflowDbContext، InventoryDbContext، OfficeDbContext، IdentityDbContext و TaxDbContext همراه با Tenant Resolver هوشمند، Schema Isolation، Quota و کش‌سازی مجزا.'
+      },
+      {
+        title: 'یکپارچه‌سازی و ارتباطات بلادرنگ',
+        desc: 'ارائه REST API نسخه‌گذاری‌شده v1، درگاه وب‌هوک برای فایل و ERP، صف پیام‌رسانی RabbitMQ با مدیریت خطا و هاب SignalR برای به‌روزرسانی زنده کارتابل.'
+      },
+      {
+        title: 'بومی‌سازی جامع و OCR فارسی',
+        desc: 'پشتیبانی عمیق از تقویم جلالی، محاسبات مالیاتی ایران (ارزش افزوده و ماده ۱۶۹)، نرمال‌سازی کلمات و حروف فارسی و Tesseract OCR اختصاصی.'
+      }
+    ];
+
+    /* ========================================================
+       4. DATA: UI/UX STRENGTHS
+       ======================================================== */
+    const uxItems = [
+      {
+        icon: 'layout',
+        title: 'رابط کاملاً راست‌چین و بومی',
+        desc: 'فونت استاندارد Vazirmatn، پشتیبانی کامل از تاریخ شمسی جلالی و الگوهای فرم سازگار با کاربران اداری ایران.'
+      },
+      {
+        icon: 'layout-grid',
+        title: 'داشبوردهای ماژولار و ثابت',
+        desc: 'کارت‌های آماری (Metric Cards)، نمودارهای روند، بج‌های وضعیت و اقدامات سریع با دسترسی یک کلیکی.'
+      },
+      {
+        icon: 'table-2',
+        title: 'جدول‌های حرفه‌ای با نماهای ذخیره‌شده',
+        desc: 'جست‌وجوی سریع، فیلتر ترکیبی، مرتب‌سازی، انتخاب ستون‌های دلخواه، ذخیره نمای شخصی و خروجی اکسل/PDF.'
+      },
+      {
+        icon: 'refresh-cw',
+        title: 'تعاملات بدون رفرش کامل (AJAX)',
+        desc: 'استفاده از اندپوینتهای JSON، باز شدن مودال‌ها، پیش‌نمایش زنده فایل و بروزرسانی بلادرنگ از طریق SignalR.'
+      },
+      {
+        icon: 'git-fork',
+        title: 'طراح گردش‌کار و کانبان',
+        desc: 'Workflow Builder گرافیکی مبتنی بر React Flow برای ترسیم فرایندهای تأیید و نمای Kanban برای ردیابی وظایف.'
+      },
+      {
+        icon: 'check-square',
+        title: 'فرم‌های پیشرفته با اعتبارسنجی',
+        desc: 'امنیت Anti-Forgery، نمایش خطاها با دقت بالا در فیلد، مدیریت Focus، اسکلتون لودر و لودرهای بصری پیشرفت.'
+      },
+      {
+        icon: 'printer',
+        title: 'الگوهای چاپ استاندارد',
+        desc: 'تمپلیت‌های اختصاصی برای چاپ رسمی فاکتورها، فیش حقوقی کارکنان، رسیدهای انبار و نامه‌های اداری.'
+      },
+      {
+        icon: 'sparkles',
+        title: 'طراحی شیک Glassmorphism',
+        desc: 'پالت رنگی سرمه‌ای تیره، سایه‌های شیشه‌ای و کنتراست فوق‌العاده مدرن بدون وابستگی به Bootstrap یا jQuery قدیمی.'
+      },
+      {
+        icon: 'monitor-smartphone',
+        title: 'پاسخ‌گویی کامل (Responsive)',
+        desc: 'سازگاری ۱۰۰٪ با انواع مانیتورهای عریض، لپ‌تاپ، تبلت و موبایل با منوی واکنش‌گرا و سلسله‌مراتب بصری تمیز.'
+      }
+    ];
+
+    /* ========================================================
+       5. DATA: COMPLETE 55+ FEATURE MATRIX TABLE
+       ======================================================== */
+    const matrixData = [
+      ["داشبورد مدیریتی و KPI", "مدیریت", "مدیر", "گزارش"],
+      ["گزارش AI از SQL Server", "مدیریت", "مدیر", "ابزار"],
+      ["پرونده کارکنان", "منابع انسانی", "مدیر/کارمند منابع انسانی", "ابزار"],
+      ["قراردادهای پرسنلی", "منابع انسانی", "مدیر/کارمند منابع انسانی", "گردش‌کار"],
+      ["مرخصی و تأیید مرخصی", "منابع انسانی", "مدیر/کارمند", "گردش‌کار"],
+      ["وام و حضور و غیاب", "منابع انسانی", "مدیر/کارمند منابع انسانی", "ابزار"],
+      ["بیمه ماهانه", "منابع انسانی", "مدیر/کارمند مالی", "ابزار"],
+      ["محاسبه و ذخیره حقوق", "حقوق و دستمزد", "مدیر مالی/منابع انسانی", "ابزار"],
+      ["چاپ فیش حقوقی", "حقوق و دستمزد", "مدیر/کارمند", "گزارش"],
+      ["فاکتور فروش و خرید", "مالی", "مدیر مالی", "ابزار"],
+      ["تأیید/رد فاکتور", "مالی", "مدیر مالی", "گردش‌کار"],
+      ["درخت حساب‌ها", "حسابداری", "حسابدار", "ابزار"],
+      ["سند حسابداری و دفتر کل", "حسابداری", "حسابدار", "ابزار"],
+      ["تراز آزمایشی", "حسابداری", "حسابدار/مدیر", "گزارش"],
+      ["بستن دوره مالی", "حسابداری", "مدیر مالی", "گردش‌کار"],
+      ["نرخ ارز", "حسابداری", "حسابدار", "ابزار"],
+      ["ارزش افزوده و گزارش فصلی", "مالیات", "مدیر مالی", "گزارش"],
+      ["تحلیل و هشدار مالیاتی", "مالیات", "مدیر مالی/ممیز", "گزارش"],
+      ["ارسال به سامانه مؤدیان", "مالیات", "مدیر مالی", "گردش‌کار"],
+      ["تطبیق صورتحساب مالیاتی", "مالیات", "ممیز/مدیر مالی", "گزارش"],
+      ["OCR فاکتور", "ورود هوشمند", "کارمند مالی", "ابزار"],
+      ["پردازش ZIP و وب‌هوک", "ورود هوشمند", "مدیر سیستم/مالی", "ابزار"],
+      ["پیش‌فاکتور", "بازرگانی", "فروشنده/مدیر فروش", "ابزار"],
+      ["برگشت فروش و خرید", "بازرگانی", "فروشنده/خریدار", "گردش‌کار"],
+      ["تسویه فاکتور", "بازرگانی", "حسابدار", "ابزار"],
+      ["قراردادهای سازمان", "قرارداد", "مدیر قرارداد", "ابزار"],
+      ["برنامه اقساط و پرداخت", "قرارداد", "مدیر قرارداد/مالی", "ابزار"],
+      ["ضمانت‌نامه", "قرارداد", "مدیر قرارداد", "ابزار"],
+      ["جریمه تأخیر", "قرارداد", "مدیر قرارداد/مالی", "ابزار"],
+      ["امضای دیجیتال قرارداد", "قرارداد", "مدیر/امضاکننده", "گردش‌کار"],
+      ["نسخه‌بندی پیوست", "قرارداد/آرشیو", "مدیر/کارمند", "ابزار"],
+      ["گزارش درآمد و مواجهه قرارداد", "قرارداد", "مدیر", "گزارش"],
+      ["کالا و انبار", "انبار", "مدیر انبار", "ابزار"],
+      ["رسید و حواله انبار", "انبار", "انباردار", "گردش‌کار"],
+      ["انتقال بین انبارها", "انبار", "انباردار/مدیر", "گردش‌کار"],
+      ["شمارش موجودی", "انبار", "انباردار/ناظر", "گردش‌کار"],
+      ["بستن دوره انبار", "انبار", "مدیر انبار", "گردش‌کار"],
+      ["نامه و مکاتبات", "اتوماسیون اداری", "کارمند/مدیر", "ابزار"],
+      ["پیش‌نویس، خلاصه و پاسخ AI", "مکاتبات", "کارمند/مدیر", "ابزار"],
+      ["آرشیو اسناد", "مدیریت اسناد", "عمومی مجاز", "ابزار"],
+      ["کارتابل تأیید", "گردش‌کار", "مدیر/کارمند", "گردش‌کار"],
+      ["واگذاری و SLA", "گردش‌کار", "مدیر/کارمند", "گردش‌کار"],
+      ["Kanban وظایف", "کارتابل", "مدیر/کارمند", "ابزار"],
+      ["نقش و مجوز", "امنیت", "مدیر سیستم", "ابزار"],
+      ["MFA و تغییر رمز", "امنیت", "عمومی", "ابزار"],
+      ["ماتریس دسترسی", "امنیت", "مدیر سیستم", "گزارش"],
+      ["Workflow Builder", "امنیت/گردش‌کار", "مدیر سیستم", "ابزار"],
+      ["اعلان و اشتراک هشدار", "اعلان‌ها", "عمومی", "ابزار"],
+      ["تقویم سازمانی", "تقویم", "مدیر/کارمند", "گزارش"],
+      ["جست‌وجوی سراسری", "پلتفرم", "عمومی مجاز", "ابزار"],
+      ["نماها و فیلترهای ذخیره‌شده", "پلتفرم", "عمومی مجاز", "ابزار"],
+      ["خروجی‌های Excel/PDF", "گزارش‌ها", "مدیر/کاربر مجاز", "گزارش"],
+      ["API و وب‌هوک ERP", "یکپارچه‌سازی", "مدیر سیستم", "ابزار"],
+      ["حسابرسی و خروجی SIEM", "امنیت/حسابرسی", "ممیز/مدیر", "گزارش"]
+    ];
+
+    /* ========================================================
+       6. DATA: 7 FAQ ACCORDION ITEMS
+       ======================================================== */
+    const faqData = [
+      {
+        q: "آیا راینو برای سازمان چندشعبه‌ای یا چندشرکتی مناسب است؟",
+        a: "بله. طراحی چندمستاجری، resolver اتصال tenant، ایزولاسیون schema/داده و تنظیمات اختصاصی هر tenant امکان استقرار تفکیک‌شده برای شرکت‌ها، شعب و واحدهای سازمانی را فراهم می‌کند."
+      },
+      {
+        q: "اطلاعات مالی و اسناد تا چه اندازه امن هستند؟",
+        a: "دسترسی‌ها بر اساس نقش، مجوز، سیاست‌های ABAC و scope داده کنترل می‌شوند. علاوه بر MFA و هدرهای امنیتی، عملیات در Audit Log ثبت می‌شود، فیلدهای حساس قابلیت masking دارند و جداسازی وظایف از تعارض دسترسی جلوگیری می‌کند."
+      },
+      {
+        q: "استقرار راینو چگونه انجام می‌شود؟",
+        a: "سامانه بر بستر ASP.NET Core و SQL Server اجرا می‌شود و با Migrationهای EF Core، Docker و تنظیمات محیطی قابل استقرار در سرور داخلی یا زیرساخت ابری سازمان است. اتصال‌ها، برندینگ، کاربران، نقش‌ها و تنظیمات هر سازمان در پنل مدیریت پیکربندی می‌شوند."
+      },
+      {
+        q: "آیا فاکتورهای کاغذی یا PDF قابل ورود خودکار هستند؟",
+        a: "بله. ماژول ورود هوشمند فایل، OCR فارسی، استخراج فیلد، تشخیص موجودیت، نرمال‌سازی ارز و تاریخ، اعتبارسنجی ساختار و ویرایش پیش از ثبت را ارائه می‌کند؛ دریافت ZIP، وب‌هوک، Base64 و Telegram نیز پشتیبانی شده است."
+      },
+      {
+        q: "راینو چگونه ارسال و پیگیری مالیات را مدیریت می‌کند؟",
+        a: "صورتحساب‌ها پس از محاسبه و اعتبارسنجی در صف ارسال قرار می‌گیرند، ارسال دسته‌ای و retry دارند، پاسخ سامانه مؤدیان ذخیره می‌شود و تطبیق، مغایرت، لاگ ممیزی، CAPTCHA/OTP، sandbox و گزارش پیشرفت در اختیار تیم مالی قرار می‌گیرد."
+      },
+      {
+        q: "آیا گردش‌کارها قابل سفارشی‌سازی هستند؟",
+        a: "بله. مدیر سیستم می‌تواند مسیرها و approverها را تعریف کند یا نمودار گردش‌کار را در Workflow Builder بسازد. تأیید، رد، واگذاری، نظر، mention، SLA و تشدید خودکار برای فرآیندها در نظر گرفته شده است."
+      },
+      {
+        q: "کاربران می‌توانند گزارش و میزکار خود را شخصی‌سازی کنند؟",
+        a: "بله. جست‌وجوی سراسری، فیلترها، انتخاب ستون، نماهای ذخیره‌شده، ترجیحات جدول، داشبوردهای ماژولار و گزارش‌ساز متنی AI، تجربه هر کاربر را متناسب با مسئولیت او تنظیم می‌کند."
+      }
+    ];
+
+    /* ========================================================
+       RENDER LOGIC
+       ======================================================== */
+    let currentActiveModuleIndex = 0;
+
+    // Helper for escaping HTML
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    // 1. Render Highlights
+    function renderHighlights() {
+      const container = document.getElementById('highlightsContainer');
+      container.innerHTML = highlightsData.map((item, idx) => `
+        <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center mb-4">
+              <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">${idx + 1}. ${escapeHtml(item.title)}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">${escapeHtml(item.desc)}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 2. Render Module Sidebar Tabs
+    function renderModuleSidebar() {
+      const sidebar = document.getElementById('moduleSidebar');
+      sidebar.innerHTML = modulesData.map((m, idx) => `
+        <button 
+          onclick="selectModule(${idx})" 
+          id="mod-tab-${idx}"
+          class="w-full text-right px-3.5 py-3 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 border border-transparent transition-all duration-200 ${idx === 0 ? 'tab-active' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'}"
+        >
+          <div class="flex items-center gap-2.5 truncate">
+            <i data-lucide="${m.icon}" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+            <span class="truncate">${m.id} ${escapeHtml(m.name)}</span>
+          </div>
+          <i data-lucide="chevron-left" class="w-3.5 h-3.5 text-slate-500 shrink-0"></i>
+        </button>
+      `).join('');
+    }
+
+    // 3. Render Active Module Details
+    function renderModuleDetail(idx) {
+      const m = modulesData[idx];
+      const area = document.getElementById('moduleContentArea');
+      
+      // Update sidebar active class
+      modulesData.forEach((_, i) => {
+        const btn = document.getElementById(`mod-tab-${i}`);
+        if (btn) {
+          if (i === idx) {
+            btn.className = "w-full text-right px-3.5 py-3 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 border border-transparent transition-all duration-200 tab-active";
+          } else {
+            btn.className = "w-full text-right px-3.5 py-3 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 border border-transparent transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-900/60";
+          }
+        }
+      });
+
+      area.innerHTML = `
+        <div class="animate-module-content space-y-7">
+          
+          <!-- Top Bar: Title & Value Card -->
+          <div class="flex flex-col md:flex-row md:items-start justify-between gap-5 border-b border-slate-800 pb-6">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-mono">
+                ماژول ${m.id}
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white flex items-center gap-3">
+                <i data-lucide="${m.icon}" class="w-7 h-7 text-cyan-400"></i>
+                <span>${escapeHtml(m.name)}</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl font-light">
+                ${escapeHtml(m.summary)}
+              </p>
+            </div>
+
+            <!-- Value delivered box -->
+            <div class="md:w-72 shrink-0 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs space-y-1.5 shadow-lg">
+              <div class="flex items-center gap-1.5 font-bold text-emerald-400">
+                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                <span>کاربرد و ارزش تجاری:</span>
+              </div>
+              <p class="text-[11px] leading-relaxed text-emerald-200/90">${escapeHtml(m.value)}</p>
+            </div>
+          </div>
+
+          <!-- Body: 2 Columns (Features List & Endpoints List) -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            <!-- Features Column (7 cols) -->
+            <div class="md:col-span-7 space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i>
+                <span>تمام ریز-امکانات ماژول (${m.features.length} مورد تفکیک‌شده):</span>
+              </h4>
+              <div class="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+                ${m.features.map(f => `
+                  <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed hover:border-slate-700 transition-colors">
+                    <span class="text-cyan-400 font-black mt-0.5">•</span>
+                    <span>${escapeHtml(f)}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Technical Endpoints Column (5 cols) -->
+            <div class="md:col-span-5 space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+                <span>مسیرها و اندپوینتهای شاخص:</span>
+              </h4>
+              <div class="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+                ${m.endpoints.map(ep => `
+                  <div class="p-2 rounded-lg bg-slate-950/90 border border-slate-800/80 font-mono text-[11px] text-cyan-300/90 dir-ltr text-left overflow-x-auto">
+                    ${escapeHtml(ep)}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom CTA Action within Module -->
+          <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400">
+            <span>نیاز به استقرار اختصاصی ماژول <strong>${escapeHtml(m.name)}</strong> دارید؟</span>
+            <button onclick="openDemoModal()" class="px-4 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold transition-all flex items-center gap-1.5">
+              <span>درخواست جلسه دمو برای این ماژول</span>
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function selectModule(idx) {
+      currentActiveModuleIndex = idx;
+      renderModuleDetail(idx);
+    }
+
+    // 4. Render Tech Stack
+    function renderTechStack() {
+      const container = document.getElementById('techStackContainer');
+      container.innerHTML = techItems.map((item, idx) => `
+        <div class="glass-card glass-card-hover rounded-2xl p-5 border border-slate-800 space-y-1.5">
+          <div class="flex items-center gap-2 text-cyan-400 text-sm font-bold">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <span>${escapeHtml(item.title)}</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-light">${escapeHtml(item.desc)}</p>
+        </div>
+      `).join('');
+    }
+
+    // 5. Render UI/UX Strengths
+    function renderUXCards() {
+      const container = document.getElementById('uxCardsContainer');
+      container.innerHTML = uxItems.map((item) => `
+        <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
+            <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-sm font-bold text-white">${escapeHtml(item.title)}</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-light">${escapeHtml(item.desc)}</p>
+        </div>
+      `).join('');
+    }
+
+    // 6. Live Filter Matrix Table
+    function renderMatrixTable() {
+      const q = document.getElementById('matrixSearch').value.trim().toLowerCase();
+      const userRole = document.getElementById('userRoleFilter').value;
+      const kind = document.getElementById('featureKindFilter').value;
+      const tbody = document.getElementById('matrixTableBody');
+      const countEl = document.getElementById('matrixResultsCount');
+      const resetBtn = document.getElementById('resetMatrixFilter');
+
+      if (q || userRole || kind) {
+        resetBtn.classList.remove('hidden');
+      } else {
+        resetBtn.classList.add('hidden');
+      }
+
+      const filtered = matrixData.filter(row => {
+        const [featureName, moduleName, userCategory, featureKind] = row;
+        const matchesQuery = !q || 
+          featureName.toLowerCase().includes(q) || 
+          moduleName.toLowerCase().includes(q) || 
+          userCategory.toLowerCase().includes(q) || 
+          featureKind.toLowerCase().includes(q);
+
+        const matchesRole = !userRole || userCategory.includes(userRole);
+        const matchesKind = !kind || featureKind === kind;
+
+        return matchesQuery && matchesRole && matchesKind;
+      });
+
+      countEl.textContent = `نمایش ${filtered.length} مورد از ${matrixData.length} امکان مستندشده سیستم راینو`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-12 text-center text-slate-400 text-sm">
+              هیچ امکانی با عبارت «${escapeHtml(q)}» یا فیلترهای انتخابی یافت نشد.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => `
+        <tr class="hover:bg-slate-900/60 transition-colors">
+          <td class="py-3.5 px-5 font-bold text-white">${escapeHtml(r[0])}</td>
+          <td class="py-3.5 px-5 text-cyan-300 font-medium">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-cyan-950/60 border border-cyan-800/60 text-xs">
+              ${escapeHtml(r[1])}
+            </span>
+          </td>
+          <td class="py-3.5 px-5 text-slate-300">${escapeHtml(r[2])}</td>
+          <td class="py-3.5 px-5">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold ${
+              r[3] === 'گردش‌کار' ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' :
+              r[3] === 'گزارش' ? 'bg-purple-500/15 text-purple-400 border border-purple-500/30' :
+              'bg-blue-500/15 text-blue-400 border border-blue-500/30'
+            }">
+              ${escapeHtml(r[3])}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 7. Render FAQ Accordion
+    function renderFAQ() {
+      const container = document.getElementById('faqAccordionContainer');
+      container.innerHTML = faqData.map((item, idx) => `
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden transition-all duration-200">
+          <button 
+            onclick="toggleFaq(${idx})" 
+            class="w-full text-right p-5 sm:p-6 text-sm sm:text-base font-bold text-white flex items-center justify-between gap-4 hover:text-cyan-300 transition-colors"
+          >
+            <span>${idx + 1}. ${escapeHtml(item.q)}</span>
+            <i data-lucide="chevron-down" id="faq-chevron-${idx}" class="w-5 h-5 text-cyan-400 shrink-0 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-answer-${idx}" class="hidden px-5 sm:px-6 pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 pt-4 font-light">
+            ${escapeHtml(item.a)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaq(idx) {
+      const ans = document.getElementById(`faq-answer-${idx}`);
+      const chev = document.getElementById(`faq-chevron-${idx}`);
+      if (ans.classList.contains('hidden')) {
+        ans.classList.remove('hidden');
+        chev.style.transform = 'rotate(180deg)';
+      } else {
+        ans.classList.add('hidden');
+        chev.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // 8. Modal Management
+    function openDemoModal() {
+      const modal = document.getElementById('demoModal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeDemoModal() {
+      const modal = document.getElementById('demoModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleDemoSubmit(e) {
+      e.preventDefault();
+      const alert = document.getElementById('demoSuccessAlert');
+      alert.classList.remove('hidden');
+      setTimeout(() => {
+        e.target.reset();
+        setTimeout(() => {
+          alert.classList.add('hidden');
+          closeDemoModal();
+        }, 2000);
+      }, 500);
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking link
+    document.querySelectorAll('#mobileMenu a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      });
+    });
+
+    // Reset Matrix Filters
+    document.getElementById('resetMatrixFilter').addEventListener('click', () => {
+      document.getElementById('matrixSearch').value = '';
+      document.getElementById('userRoleFilter').value = '';
+      document.getElementById('featureKindFilter').value = '';
+      renderMatrixTable();
+    });
+
+    // Close modal on background click
+    document.getElementById('demoModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('demoModal')) {
+        closeDemoModal();
+      }
+    });
+
+    // Setup Listeners for live matrix filtering
+    document.getElementById('matrixSearch').addEventListener('input', renderMatrixTable);
+    document.getElementById('userRoleFilter').addEventListener('change', renderMatrixTable);
+    document.getElementById('featureKindFilter').addEventListener('change', renderMatrixTable);
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      renderHighlights();
+      renderModuleSidebar();
+      renderModuleDetail(0);
+      renderTechStack();
+      renderUXCards();
+      renderMatrixTable();
+      renderFAQ();
+      lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
