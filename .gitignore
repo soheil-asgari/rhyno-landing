@@ -1,2 +1,9 @@
 node_modules/
-css/tailwind.css
+dist/
+
+# Stray shell-redirect artifact
+$null
+
+# Local QA artifacts
+.screenshots/
+.lighthouse/
