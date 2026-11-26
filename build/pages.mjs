@@ -84,6 +84,9 @@ function write(relPath, html) {
 /* partials                                                            */
 /* ------------------------------------------------------------------ */
 
+/* Set once the blog is loaded; controls the RSS <link rel="alternate">. */
+let HAS_FEED = false;
+
 function head({
   title,
   description,
@@ -132,6 +135,7 @@ ${next ? `<link rel="next" href="${abs(next)}">` : ""}
 ${publishedTime ? `<meta property="article:published_time" content="${publishedTime}">` : ""}
 ${modifiedTime ? `<meta property="article:modified_time" content="${modifiedTime}">` : ""}
 
+${HAS_FEED ? `<link rel="alternate" type="application/rss+xml" title="مقالات راینو ERP" href="${SITE.baseUrl}/blog/feed.xml">` : ""}
 <link rel="icon" href="/assets/rhyno-logo-40.png" type="image/png" sizes="40x40">
 <link rel="apple-touch-icon" href="/assets/rhyno-logo-96.png">
 <link rel="preload" href="/assets/fonts/Vazirmatn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
@@ -602,6 +606,8 @@ const blog = await loadBlog({
 });
 
 for (const w of blog.warnings) console.warn(`warn: ${w}`);
+
+HAS_FEED = blog.articles.length > 0;
 
 /* Shared helpers handed to the blog renderer so both sides use the same
    partials, escaping and number formatting. */
