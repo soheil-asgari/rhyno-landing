@@ -8,6 +8,7 @@
     "build:css": "tailwindcss -i ./tailwind.input.css -o ./dist/css/tailwind.css --minify",
     "build:images": "node ./build/optimize-images.mjs",
     "build": "npm run build:pages && npm run build:css",
+    "new-article": "node ./build/new-article.mjs",
     "serve": "node ./build/serve.mjs 3000",
     "qa:links": "node ./build/check.mjs",
     "qa:structure": "node ./build/structure.mjs",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "marked": "^18.3.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3"
   },
   "dependencies": {
