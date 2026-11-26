@@ -1,23 +1,341 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-dark: #050b14;
-  --color-brand-navy: #0b1728;
-  --color-brand-card: #0f2038;
-  --color-brand-border: #1e385c;
-  --color-brand-cyan: #38bdf8;
-  --color-brand-accent: #06b6d4;
-  --color-brand-emerald: #10b981;
-  --color-brand-blue: #3b82f6;
+/* ============================================================
+   Rhyno ERP — Design tokens
+   One brand color + neutral ramp + two accents.
+   ============================================================ */
 
-  --font-family-vazir: 'Vazirmatn', sans-serif;
+/* Real font — preloaded in <head>, swapped in as soon as it is ready. */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../assets/fonts/Vazirmatn-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Dark mode via class strategy */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Metric-matched fallback so the swap does not reflow the layout. */
+@font-face {
+  font-family: "Vazirmatn Fallback";
+  src: local("Tahoma"), local("Segoe UI"), local("Arial");
+  font-weight: 100 900;
+  size-adjust: 96%;
+  ascent-override: 105%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+}
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+@theme {
+  --font-sans: "Vazirmatn", "Vazirmatn Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Brand — a single, calm enterprise blue */
+  --color-brand-50: #eff5ff;
+  --color-brand-100: #dbe8fe;
+  --color-brand-200: #bfd7fe;
+  --color-brand-300: #93bbfd;
+  --color-brand-400: #609afa;
+  --color-brand-500: #3b7bf6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-brand-950: #172554;
+
+  /* Neutrals — cool, low-chroma */
+  --color-ink-25: #fbfcfd;
+  --color-ink-50: #f6f8fa;
+  --color-ink-100: #eef1f5;
+  --color-ink-200: #e2e7ee;
+  --color-ink-300: #cbd3de;
+  --color-ink-400: #94a1b2;
+  --color-ink-500: #64748b;
+  --color-ink-600: #4a5768;
+  --color-ink-700: #38424f;
+  --color-ink-800: #232b36;
+  --color-ink-900: #141a22;
+  --color-ink-950: #0b0f14;
+
+  /* Accent 1 — trust / success */
+  --color-teal-50: #ecfdf7;
+  --color-teal-100: #d1fae9;
+  --color-teal-200: #a7f3d6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+
+  /* Accent 2 — attention / compliance */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+
+  /* Radii */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  /* Elevation */
+  --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -10px rgba(16, 24, 40, 0.12);
+  --shadow-lift: 0 2px 4px rgba(16, 24, 40, 0.04), 0 20px 44px -16px rgba(16, 24, 40, 0.18);
+
+  /* Type scale */
+  --text-display: 3.25rem;
+  --text-display--line-height: 1.14;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 800;
+
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.018em;
+
+  --text-h2: 2rem;
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.014em;
+
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.4;
+
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.85;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.6;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink-25 font-sans text-ink-600 antialiased;
+    font-feature-settings: "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-extrabold text-ink-900;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-brand-600;
+  }
+
+  ::selection {
+    @apply bg-brand-600/15 text-ink-900;
+  }
+
+  /* Persian numerals read better with tabular figures in tables only */
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-14 sm:py-18 lg:py-24;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:right-3 focus:z-[100] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold whitespace-nowrap transition-all duration-200 disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply bg-brand-600 text-white shadow-card hover:bg-brand-700 hover:shadow-lift active:translate-y-px;
+  }
+
+  .btn-secondary {
+    @apply border border-ink-200 bg-white text-ink-800 shadow-soft hover:border-ink-300 hover:bg-ink-50;
+  }
+
+  .btn-ghost {
+    @apply text-ink-600 hover:bg-ink-100 hover:text-ink-900;
+  }
+
+  .btn-sm {
+    @apply px-3.5 py-2 text-xs;
+  }
+
+  /* Surfaces */
+  .card {
+    @apply rounded-xl border border-ink-200/80 bg-white shadow-soft;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:border-ink-300 hover:shadow-card;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-brand-100 bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700;
+  }
+
+  .badge-neutral {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-ink-50 px-2.5 py-0.5 text-xs font-bold text-ink-600;
+  }
+
+  .badge-teal {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-2.5 py-0.5 text-xs font-bold text-teal-700;
+  }
+
+  .badge-amber {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-bold text-amber-700;
+  }
+
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 text-xs font-bold tracking-wide text-brand-700;
+  }
+
+  .icon-tile {
+    @apply inline-flex size-11 shrink-0 items-center justify-center rounded-lg border border-brand-100 bg-brand-50 text-brand-600;
+  }
+
+  .icon-tile-sm {
+    @apply inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-ink-200 bg-ink-50 text-ink-600;
+  }
+
+  /* Forms */
+  .label {
+    @apply mb-1.5 block text-sm font-bold text-ink-800;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-ink-200 bg-white px-4 py-3 text-sm text-ink-900 shadow-soft transition-colors placeholder:text-ink-400 hover:border-ink-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-600/10 focus:outline-none;
+  }
+
+  .field[aria-invalid="true"] {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-500/10;
+  }
+
+  .hint {
+    @apply mt-1.5 text-xs text-ink-500;
+  }
+
+  .error-text {
+    @apply mt-1.5 flex items-start gap-1.5 text-xs font-bold text-red-600;
+  }
+
+  /* Accordion (native details) */
+  .accordion-item {
+    @apply overflow-hidden rounded-xl border border-ink-200 bg-white shadow-soft transition-colors;
+  }
+
+  .accordion-item[open] {
+    @apply border-brand-200;
+  }
+
+  .accordion-trigger {
+    @apply flex w-full cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-start text-sm font-bold text-ink-900 hover:bg-ink-50 sm:px-6 sm:py-5 sm:text-base;
+  }
+
+  .accordion-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion-trigger .accordion-chevron {
+    @apply shrink-0 text-brand-600 transition-transform duration-200;
+  }
+
+  .accordion-item[open] .accordion-chevron {
+    transform: rotate(180deg);
+  }
+
+  .accordion-panel {
+    @apply border-t border-ink-100 px-5 py-4 text-sm leading-relaxed text-ink-600 sm:px-6 sm:py-5;
+  }
+
+  /* Prose for long-form content */
+  .prose-fa {
+    @apply text-sm leading-8 text-ink-600 sm:text-base;
+  }
+
+  .prose-fa h2 {
+    @apply mt-10 mb-3 text-xl font-extrabold text-ink-900 sm:text-2xl;
+  }
+
+  .prose-fa h3 {
+    @apply mt-8 mb-2 text-base font-extrabold text-ink-900 sm:text-lg;
+  }
+
+  .prose-fa p {
+    @apply my-3;
+  }
+
+  .prose-fa ul {
+    @apply my-3 space-y-2;
+  }
+
+  .prose-fa li {
+    @apply relative pe-5;
+  }
+
+  .prose-fa li::before {
+    content: "";
+    @apply absolute end-0 top-3.5 size-1.5 rounded-full bg-brand-400;
+  }
+
+  /* Feature matrix */
+  .matrix-row {
+    @apply border-b border-ink-100 last:border-0;
+  }
+
+  .matrix-row[hidden] {
+    display: none !important;
+  }
+
+  /* Decorative helpers */
+  .grid-fade {
+    background-image:
+      linear-gradient(to bottom, rgba(37, 99, 235, 0.06), transparent 70%),
+      linear-gradient(rgba(20, 26, 34, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 26, 34, 0.045) 1px, transparent 1px);
+    background-size: 100% 100%, 56px 56px, 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
 }
