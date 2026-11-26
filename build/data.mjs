@@ -21,7 +21,6 @@ export const SITE = {
   tagline: "مرکز فرماندهی یکپارچه سازمان",
   description:
     "راینو ERP؛ پلتفرم فارسی و یکپارچه مالی، منابع انسانی، قرارداد، انبار، کارتابل و مالیات برای سازمان‌های ایرانی.",
-  enamadId: "41188724",
   enamadVerifyId: "19453737",
   enamadSeal: {
     href: "https://trustseal.enamad.ir/?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT",

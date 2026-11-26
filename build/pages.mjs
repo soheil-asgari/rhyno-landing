@@ -89,12 +89,11 @@ function head({ title, description, path, jsonLd = [], ogType = "website" }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="enamad" content="${SITE.enamadVerifyId}" />
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
 <meta name="theme-color" content="#2563eb">
-<meta name="enamad" content="${SITE.enamadId}">
-<meta name="enamad" content="${SITE.enamadVerifyId}" />
 <meta name="robots" content="index,follow,max-image-preview:large">
 
 <meta property="og:type" content="${ogType}">
