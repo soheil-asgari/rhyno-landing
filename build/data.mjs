@@ -539,8 +539,8 @@ export const SECURITY_JARGON = [
 export const NAV_LINKS = [
   { label: "ماژول‌ها", href: "/modules/index.html" },
   { label: "امکانات", href: "/features.html" },
+  { label: "مقالات", href: "/blog/index.html" },
   { label: "امنیت", href: "/security.html" },
-  { label: "پرسش‌ها", href: "/faq.html" },
   { label: "تماس", href: "/contact.html" },
 ];
 

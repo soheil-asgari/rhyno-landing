@@ -32,6 +32,8 @@ import {
   PORTAL_URL,
 } from "./data.mjs";
 import { icon } from "./icons.mjs";
+import { loadBlog, materializeBlogImages, buildFeed } from "./lib/blog-data.mjs";
+import { renderBlogPages, latestArticlesSection } from "./blog.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -82,8 +84,23 @@ function write(relPath, html) {
 /* partials                                                            */
 /* ------------------------------------------------------------------ */
 
-function head({ title, description, path, jsonLd = [], ogType = "website" }) {
+function head({
+  title,
+  description,
+  path,
+  jsonLd = [],
+  ogType = "website",
+  image,
+  imageAlt,
+  publishedTime,
+  modifiedTime,
+  prev,
+  next,
+  robots = "index,follow,max-image-preview:large",
+}) {
   const canonical = abs(path);
+  const ogImage = image || `${SITE.baseUrl}/assets/og-image.png`;
+  const ogAlt = imageAlt || "راینو ERP — همه‌ی عملیات سازمان، در یک سیستم فارسی";
   return `<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
@@ -94,7 +111,9 @@ function head({ title, description, path, jsonLd = [], ogType = "website" }) {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
 <meta name="theme-color" content="#2563eb">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="robots" content="${robots}">
+${prev ? `<link rel="prev" href="${abs(prev)}">` : ""}
+${next ? `<link rel="next" href="${abs(next)}">` : ""}
 
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="${esc(SITE.name)}">
@@ -102,14 +121,16 @@ function head({ title, description, path, jsonLd = [], ogType = "website" }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE.baseUrl}/assets/og-image.png">
+<meta property="og:image" content="${ogImage}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="راینو ERP — همه‌ی عملیات سازمان، در یک سیستم فارسی">
+<meta property="og:image:alt" content="${esc(ogAlt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
-<meta name="twitter:image" content="${SITE.baseUrl}/assets/og-image.png">
+<meta name="twitter:image" content="${ogImage}">
+${publishedTime ? `<meta property="article:published_time" content="${publishedTime}">` : ""}
+${modifiedTime ? `<meta property="article:modified_time" content="${modifiedTime}">` : ""}
 
 <link rel="icon" href="/assets/rhyno-logo-40.png" type="image/png" sizes="40x40">
 <link rel="apple-touch-icon" href="/assets/rhyno-logo-96.png">
@@ -122,7 +143,7 @@ ${jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</sc
 function header(activeHref) {
   const links = NAV_LINKS.map(
     (l) =>
-      `<li><a href="${l.href}" class="rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+      `<li><a href="${l.href}" class="inline-flex min-h-9 items-center rounded-md px-3 text-sm font-semibold transition-colors ${
         l.href === activeHref ? "text-brand-700" : "text-ink-600 hover:text-ink-900"
       }"${l.href === activeHref ? ' aria-current="page"' : ""}>${esc(l.label)}</a></li>`
   ).join("");
@@ -139,7 +160,7 @@ function header(activeHref) {
     </a>
 
     <nav aria-label="ناوبری اصلی" class="hidden lg:block">
-      <ul class="flex items-center gap-0.5">${links}</ul>
+      <ul class="flex items-center gap-1">${links}</ul>
     </nav>
 
     <div class="hidden items-center gap-2 lg:flex">
@@ -571,6 +592,34 @@ function heroMockup() {
 }
 
 /* ------------------------------------------------------------------ */
+/* blog content                                                        */
+/* ------------------------------------------------------------------ */
+
+const blog = await loadBlog({
+  moduleSlugs: MODULES.map((m) => m.slug),
+  log: console.log,
+  warn: console.warn,
+});
+
+for (const w of blog.warnings) console.warn(`warn: ${w}`);
+
+/* Shared helpers handed to the blog renderer so both sides use the same
+   partials, escaping and number formatting. */
+const blogHelpers = {
+  SITE,
+  MODULES,
+  esc,
+  fa,
+  icon,
+  abs,
+  head,
+  header,
+  footer,
+  breadcrumbs,
+  ctaBand,
+};
+
+/* ------------------------------------------------------------------ */
 /* pages                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -792,6 +841,8 @@ const pages = [];
     </div>
   </section>
 
+  ${latestArticlesSection(blog, blogHelpers)}
+
   <section class="section" id="demo" aria-labelledby="demo-title">
     <div class="container-page">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
@@ -1007,6 +1058,40 @@ for (const m of MODULES) {
       </div>
     </div>
   </section>
+
+  ${
+    (blog.byModule.get(m.slug) || []).length
+      ? `<section class="section border-t border-ink-200 bg-white" aria-labelledby="module-articles-title">
+    <div class="container-page">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="eyebrow">مقالات مرتبط</p>
+          <h2 id="module-articles-title" class="text-h3 font-extrabold">راهنماهای این ماژول</h2>
+        </div>
+        <a href="/blog/" class="btn btn-secondary btn-sm self-start sm:self-auto">همه مقالات</a>
+      </div>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        ${(blog.byModule.get(m.slug) || [])
+          .slice(0, 3)
+          .map(
+            (a) => `<li>
+          <a href="${a.path}" class="card card-hover flex h-full flex-col p-5">
+            <span class="badge-neutral self-start">${esc(a.categoryName)}</span>
+            <span class="mt-3 block text-sm font-extrabold leading-6 text-ink-900">${esc(a.title)}</span>
+            <span class="mt-2 block flex-1 text-xs leading-6 text-ink-500">${esc(a.description)}</span>
+            <span class="mt-3 flex items-center gap-1 text-xs font-bold text-brand-700">مطالعه مقاله ${icon(
+              "arrowleft",
+              "size-3.5"
+            )}</span>
+          </a>
+        </li>`
+          )
+          .join("\n        ")}
+      </ul>
+    </div>
+  </section>`
+      : ""
+  }
 
   ${ctaBand()}
 </main>`;
@@ -1427,17 +1512,30 @@ for (const file of ["41188724.txt"]) {
   if (existsSync(from)) cpSync(from, join(DIST, file));
 }
 
+/* blog pages (index + pagination, articles, categories, tags) */
+const blogPages = renderBlogPages(blog, blogHelpers);
+pages.push(...blogPages);
+
 const written = pages.map((p) => write(p.path.replace(/^\//, ""), p.html));
+
+/* processed blog images — cached by source hash in .cache/ */
+const imageStats = await materializeBlogImages(blog);
 
 /* sitemap — clean URLs, matching vercel cleanUrls */
 const urls = pages
   .map((p) => {
     const loc = abs(p.path);
     const isHome = p.path === "/index.html";
+    const sm = p.sitemap || {};
+    const changefreq =
+      sm.changefreq || (isHome ? "weekly" : p.path.startsWith("/modules/") ? "monthly" : "monthly");
+    const priority =
+      sm.priority || (isHome ? "1.0" : p.path.startsWith("/modules/") ? "0.7" : "0.8");
+    const lastmod = sm.lastmod ? `\n    <lastmod>${sm.lastmod}</lastmod>` : "";
     return `  <url>
-    <loc>${loc}</loc>
-    <changefreq>${isHome ? "weekly" : "monthly"}</changefreq>
-    <priority>${isHome ? "1.0" : p.path.startsWith("/modules/") ? "0.7" : "0.8"}</priority>
+    <loc>${loc}</loc>${lastmod}
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
   </url>`;
   })
   .join("\n");
@@ -1460,4 +1558,35 @@ Sitemap: ${SITE.baseUrl}/sitemap.xml
 `
 );
 
-console.log(`build:pages — ${written.length} pages, sitemap.xml, robots.txt`);
+/* RSS feed for the blog */
+if (blog.articles.length) {
+  write("blog/feed.xml", buildFeed(blog, {
+    baseUrl: SITE.baseUrl,
+    siteName: SITE.name,
+    description: "مقالات کاربردی راینو ERP درباره مالی، منابع انسانی، قرارداد، انبار، مالیات و اتوماسیون اداری.",
+  }));
+}
+
+/* build report */
+if (blog.report.length) {
+  console.log(`\nblog — ${blog.articles.length} published article(s)`);
+  for (const r of blog.report) {
+    const links = r.links.length
+      ? r.links.map((l) => `"${l.phrase}" → ${l.href}`).join(", ")
+      : "none";
+    console.log(`  • ${r.slug}`);
+    console.log(`      autolinks: ${links}`);
+    console.log(`      related: ${r.related.join(", ") || "none"}`);
+    console.log(`      modules: ${r.modules.join(", ") || "none"}  cover: ${r.cover}`);
+  }
+}
+if (blog.excludedInfo.length) {
+  console.log(`blog — ${blog.excludedInfo.length} excluded: ${blog.excludedInfo
+    .map((e) => `${e.slug} (${e.reason})`)
+    .join(", ")}`);
+}
+console.log(
+  `blog — images: ${imageStats.encoded} encoded, ${imageStats.cached} from cache`
+);
+
+console.log(`build:pages — ${written.length} pages, sitemap.xml, robots.txt, blog/feed.xml`);

@@ -7,3 +7,6 @@ $null
 # Local QA artifacts
 .screenshots/
 .lighthouse/
+
+# Blog image cache (rebuilt from content/articles sources)
+.cache/
