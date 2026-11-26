@@ -41,7 +41,7 @@ export const SITE = {
     address: "تهران، ایران",
   },
   demoEndpoint: "https://api.web3forms.com/submit",
-  demoAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
+  demoAccessKey: "769de252-a7a4-4379-8c51-a7a24f1dd5d8",
 };
 
 /* ------------------------------------------------------------------
