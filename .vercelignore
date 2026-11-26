@@ -1,10 +1,3 @@
-# Vercel uploads this repo and runs `npm run build`, which writes dist/.
-# Only dist/ is published, so internal docs are already unreachable — these
-# entries just keep the upload small.
-
-# Internal docs
-docs/
-
 # Local QA artifacts
 .screenshots/
 .lighthouse/
