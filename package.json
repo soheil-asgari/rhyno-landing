@@ -10,10 +10,11 @@
     "build": "npm run build:pages && npm run build:css",
     "serve": "node ./build/serve.mjs 3000",
     "qa:links": "node ./build/check.mjs",
+    "qa:structure": "node ./build/structure.mjs",
     "qa:layout": "node ./build/audit.mjs",
     "qa:interact": "node ./build/interact.mjs",
     "qa:visual": "node ./build/visual.mjs",
-    "qa": "npm run qa:links && npm run qa:layout && npm run qa:visual && npm run qa:interact",
+    "qa": "npm run qa:links && npm run qa:structure && npm run qa:layout && npm run qa:visual && npm run qa:interact",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
   "devDependencies": {

@@ -107,11 +107,15 @@ for (const f of ["sitemap.xml", "robots.txt", "css/tailwind.css", "js/site.js", 
 const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 for (const loc of locs) {
-  const path = loc.replace("https://www.rhynoai.ir", "");
-  const rel = path === "/" ? "index.html" : path.replace(/^\//, "");
+  const path = loc.replace("https://www.rhynoai.ir", "").replace(/\/$/, "");
+  const rel = path === "" ? "index.html" : path.replace(/^\//, "");
   const candidates = [join(ROOT, rel), join(ROOT, rel + ".html"), join(ROOT, rel, "index.html")];
   if (!candidates.some((c) => existsSync(c))) problems.push(`sitemap: ${loc} has no file`);
 }
+
+/* sitemap must not contain .html (cleanUrls) */
+const htmlLocs = locs.filter((l) => /\.html$/.test(l));
+if (htmlLocs.length) problems.push(`sitemap contains .html URLs: ${htmlLocs.slice(0, 3).join(", ")}`);
 
 console.log(`checked ${files.length} pages, ${locs.length} sitemap URLs`);
 if (problems.length) {

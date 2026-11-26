@@ -53,9 +53,12 @@ const esc = (s) =>
 
 const fa = (n) => String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
-/* clean URL for canonicals: /index.html -> /, /modules/index.html -> /modules/ */
+/* clean URL for canonicals: /index.html -> /, /modules/index.html -> /modules/,
+   /modules/finance.html -> /modules/finance */
 const pretty = (p) =>
-  p === "/index.html" ? "/" : p.replace(/\/index\.html$/, "/");
+  p === "/index.html"
+    ? "/"
+    : p.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
 
 const abs = (p) => `${SITE.baseUrl}${pretty(p)}`;
 
@@ -1426,7 +1429,7 @@ for (const file of ["41188724.txt"]) {
 
 const written = pages.map((p) => write(p.path.replace(/^\//, ""), p.html));
 
-/* sitemap */
+/* sitemap — clean URLs, matching vercel cleanUrls */
 const urls = pages
   .map((p) => {
     const loc = abs(p.path);
