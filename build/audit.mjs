@@ -12,7 +12,7 @@
  */
 
 import { spawn } from "node:child_process";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -24,7 +24,7 @@ const CHROME =
   process.env.CHROME_PATH ||
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 
-const PAGES = [
+const BASE_PAGES = [
   "/",
   "/modules/",
   "/modules/finance",
@@ -35,6 +35,24 @@ const PAGES = [
   "/demo",
   "/contact",
 ];
+
+/* Blog pages are discovered from dist/ so new articles are covered
+   automatically without touching this file. */
+function blogPages() {
+  const dist = join(ROOT, "dist", "blog");
+  if (!existsSync(dist)) return [];
+  const out = [];
+  const walk = (dir, prefix) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) walk(join(dir, e.name), `${prefix}${e.name}/`);
+      else if (e.name === "index.html") out.push(prefix);
+    }
+  };
+  walk(dist, "/blog/");
+  return out.sort();
+}
+
+const PAGES = [...BASE_PAGES, ...blogPages()];
 
 const VIEWPORTS = [
   { name: "360", width: 360, height: 800, mobile: true },

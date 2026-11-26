@@ -333,7 +333,47 @@ async function main() {
     JSON.stringify(noJs)
   );
 
-  /* ---------- 7. 404 / unknown route ---------- */
+  /* ---------- 7. Blog article navigation ---------- */
+  await goto("/blog");
+  const blogIndex = await evalJs(`(() => ({
+    h1: document.querySelectorAll('h1').length,
+    cards: document.querySelectorAll('main article').length,
+    blogLinks: document.querySelectorAll('a[href^="/blog/"]').length,
+    firstArticle: document.querySelector('main article a[href^="/blog/"]')?.getAttribute('href') || null,
+  }))()`);
+
+  const blogPath = blogIndex.firstArticle;
+  check(
+    "blog index renders article cards",
+    blogIndex.h1 === 1 && blogIndex.cards >= 1 && blogIndex.blogLinks >= 1,
+    JSON.stringify(blogIndex)
+  );
+
+  if (blogPath) {
+    await goto(blogPath);
+    const article = await evalJs(`(() => ({
+      h1: document.querySelectorAll('h1').length,
+      toc: !!document.querySelector('[aria-labelledby="toc-title"]'),
+      tocLinksResolve: [...document.querySelectorAll('[aria-labelledby="toc-title"] a[href^="#"]')]
+        .every(a => !!document.getElementById(a.getAttribute('href').slice(1))),
+      eagerCover: !!document.querySelector('picture img[fetchpriority="high"]'),
+      lazyBelow: [...document.querySelectorAll('img')].filter(i => i.getAttribute('loading') === 'lazy').length,
+      jsonLd: [...document.querySelectorAll('script[type="application/ld+json"]')].length,
+      demoCta: !!document.querySelector('main a[href="/demo"]'),
+    }))()`);
+    check(
+      "article page: single h1, TOC anchors resolve, eager cover",
+      article.h1 === 1 && article.tocLinksResolve && article.eagerCover,
+      JSON.stringify(article)
+    );
+    check(
+      "article page has JSON-LD and a demo CTA",
+      article.jsonLd >= 2 && article.demoCta === true,
+      JSON.stringify({ jsonLd: article.jsonLd, demoCta: article.demoCta })
+    );
+  }
+
+  /* ---------- 8. 404 / unknown route ---------- */
   await goto("/this-page-does-not-exist");
   check(
     "unknown route returns 404 page",
