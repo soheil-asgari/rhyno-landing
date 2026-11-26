@@ -94,6 +94,7 @@ function head({ title, description, path, jsonLd = [], ogType = "website" }) {
 <link rel="canonical" href="${canonical}">
 <meta name="theme-color" content="#2563eb">
 <meta name="enamad" content="${SITE.enamadId}">
+<meta name="enamad" content="${SITE.enamadVerifyId}" />
 <meta name="robots" content="index,follow,max-image-preview:large">
 
 <meta property="og:type" content="${ogType}">
