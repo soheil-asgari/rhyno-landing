@@ -1,7 +1,20 @@
 {
+  "name": "rhyno-landing",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Static marketing site for Rhyno ERP (Persian, RTL, Tailwind v4)",
   "scripts": {
-    "build:css": "tailwindcss -i ./tailwind.input.css -o ./css/tailwind.css --minify",
-    "build": "npm run build:css"
+    "build:pages": "node ./build/pages.mjs",
+    "build:css": "tailwindcss -i ./tailwind.input.css -o ./dist/css/tailwind.css --minify",
+    "build:images": "node ./build/optimize-images.mjs",
+    "build": "npm run build:pages && npm run build:css",
+    "serve": "node ./build/serve.mjs 3000",
+    "qa:links": "node ./build/check.mjs",
+    "qa:layout": "node ./build/audit.mjs",
+    "qa:interact": "node ./build/interact.mjs",
+    "qa:visual": "node ./build/visual.mjs",
+    "qa": "npm run qa:links && npm run qa:layout && npm run qa:visual && npm run qa:interact",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
