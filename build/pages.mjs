@@ -19,14 +19,12 @@ import {
   CATEGORIES,
   MODULES,
   MATRIX,
+  MATRIX_MODULES,
   FAQ,
-  MATRIX_ROLES,
-  MATRIX_KINDS,
   BENEFITS,
   SECURITY_POINTS,
   AI_POINTS,
   TRUST_STRIP,
-  STATS,
   SECURITY_JARGON,
   NAV_LINKS,
   PORTAL_URL,
@@ -64,11 +62,12 @@ const pretty = (p) =>
 
 const abs = (p) => `${SITE.baseUrl}${pretty(p)}`;
 
-/* Rewrite internal .html links to clean URLs (matches vercel cleanUrls). */
+/* Rewrite internal .html links to clean URLs (matches vercel cleanUrls).
+   Any "/dir/index.html" becomes "/dir/" so no index.html ever reaches the
+   output; the final rule catches module/article pages. */
 const cleanLinks = (html) =>
   html
-    .replace(/href="\/index\.html"/g, 'href="/"')
-    .replace(/href="\/modules\/index\.html"/g, 'href="/modules/"')
+    .replace(/href="([^"]*?)\/index\.html"/g, (_, base) => `href="${base || ""}/"`)
     .replace(/href="(\/(?:modules\/)?[a-z0-9-]+)\.html"/g, 'href="$1"');
 
 const DIST = join(ROOT, "dist");
@@ -159,7 +158,7 @@ function header(activeHref) {
       <img src="/assets/rhyno-logo-40.png" alt="" width="36" height="36" class="size-9 rounded-lg object-cover" fetchpriority="high" decoding="async">
       <span class="flex flex-col leading-none">
         <span class="text-base font-extrabold text-ink-900">راینو</span>
-        <span class="mt-1 text-[10px] font-semibold text-ink-500" aria-hidden="true">ERP سازمانی</span>
+        <span class="mt-1 text-[10px] font-semibold text-ink-500" aria-hidden="true">ERP</span>
       </span>
     </a>
 
@@ -390,6 +389,10 @@ function demoForm({ id = "demoForm", compact = false }) {
     <span data-submit-arrow>${icon("arrowleft", "size-4")}</span>
   </button>
 
+  <p class="text-center text-xs font-semibold leading-6 text-teal-700">
+    از یک ماژول شروع کنید و در صورت نیاز گسترش دهید.
+  </p>
+
   <p class="text-center text-xs leading-6 text-ink-500">
     با ثبت درخواست، کارشناس ما در ساعات کاری با شما تماس می‌گیرد. اطلاعات شما در اختیار شخص دیگری قرار نمی‌گیرد.
   </p>
@@ -400,41 +403,30 @@ function demoForm({ id = "demoForm", compact = false }) {
 
 /* Matrix ---------------------------------------------------------- */
 
-function matrixRow(r, i) {
-  const kindClass =
-    r.kind === "گردش‌کار" ? "badge-teal" : r.kind === "گزارش" ? "badge-amber" : "badge-neutral";
-  return `<div class="matrix-row grid gap-1.5 px-4 py-4 sm:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)_minmax(0,1.1fr)_auto] sm:items-center sm:gap-4 sm:px-5"
-     data-feature="${esc(r.feature)}" data-module="${esc(r.module)}" data-role="${esc(r.role)}" data-kind="${esc(r.kind)}">
+function matrixRow(r) {
+  return `<div class="matrix-row grid gap-1.5 px-4 py-4 sm:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)] sm:items-center sm:gap-4 sm:px-5"
+     data-feature="${esc(r.feature)}" data-module="${esc(r.module)}">
   <p class="text-sm font-bold text-ink-900">${esc(r.feature)}</p>
-  <p class="text-xs text-ink-500 sm:text-sm"><span class="sm:hidden">ماژول: </span><span class="badge-neutral">${esc(r.module)}</span></p>
-  <p class="text-xs text-ink-600 sm:text-sm"><span class="text-ink-500 sm:hidden">کاربر: </span>${esc(r.role)}</p>
-  <p class="sm:text-end"><span class="${kindClass}">${esc(r.kind)}</span></p>
+  <p class="text-xs text-ink-500 sm:text-sm"><span class="badge-neutral">${esc(r.module)}</span></p>
 </div>`;
 }
 
-function matrixBlock({ idPrefix = "matrix", heading = true }) {
+function matrixBlock({ idPrefix = "matrix" }) {
   return `<div class="mt-8">
   <div class="card p-4 sm:p-5">
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_13rem_12rem]">
+    <div class="grid gap-3 sm:grid-cols-2">
       <div>
         <label class="label" for="${idPrefix}-search">جست‌وجو در امکانات</label>
         <div class="relative">
           <span class="pointer-events-none absolute inset-y-0 end-3 flex items-center text-ink-400">${icon("search", "size-4")}</span>
-          <input class="field pe-10" id="${idPrefix}-search" type="search" placeholder="مثال: OCR، بیمه، امضا، مؤدیان" autocomplete="off">
+          <input class="field pe-10" id="${idPrefix}-search" type="search" placeholder="مثال: بیمه، امضا، مؤدیان" autocomplete="off">
         </div>
       </div>
       <div>
-        <label class="label" for="${idPrefix}-role">دسته کاربر</label>
-        <select class="field" id="${idPrefix}-role">
-          <option value="">همه کاربران</option>
-          ${MATRIX_ROLES.map((r) => `<option value="${esc(r)}">${esc(r)}</option>`).join("\n          ")}
-        </select>
-      </div>
-      <div>
-        <label class="label" for="${idPrefix}-kind">نوع قابلیت</label>
-        <select class="field" id="${idPrefix}-kind">
-          <option value="">همه انواع</option>
-          ${MATRIX_KINDS.map((k) => `<option value="${esc(k)}">${esc(k)}</option>`).join("\n          ")}
+        <label class="label" for="${idPrefix}-module">ماژول</label>
+        <select class="field" id="${idPrefix}-module">
+          <option value="">همه ماژول‌ها</option>
+          ${MATRIX_MODULES.map((m) => `<option value="${esc(m)}">${esc(m)}</option>`).join("\n          ")}
         </select>
       </div>
     </div>
@@ -445,8 +437,8 @@ function matrixBlock({ idPrefix = "matrix", heading = true }) {
   </div>
 
   <div class="card mt-4 overflow-hidden" data-matrix>
-    <div class="hidden border-b border-ink-200 bg-ink-50 px-5 py-3 text-xs font-extrabold text-ink-600 sm:grid sm:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)_minmax(0,1.1fr)_auto] sm:gap-4">
-      <span>نام امکان</span><span>ماژول</span><span>دسته کاربر</span><span class="text-end">نوع</span>
+    <div class="hidden border-b border-ink-200 bg-ink-50 px-5 py-3 text-xs font-extrabold text-ink-600 sm:grid sm:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)] sm:gap-4">
+      <span>نام امکان</span><span>ماژول</span>
     </div>
     ${MATRIX.map(matrixRow).join("\n    ")}
     <p class="hidden px-5 py-10 text-center text-sm text-ink-500" data-matrix-empty>
@@ -515,7 +507,7 @@ function benefitCard(b) {
 }
 
 function trustStrip() {
-  return `<ul class="mt-10 grid gap-x-6 gap-y-3 border-t border-ink-200 pt-6 text-xs font-semibold text-ink-500 sm:grid-cols-2 lg:grid-cols-4">
+  return `<ul class="mt-10 grid gap-x-6 gap-y-3 border-t border-ink-200 pt-6 text-xs font-semibold text-ink-500 sm:grid-cols-3">
   ${TRUST_STRIP.map(
     (t) => `<li class="flex items-center gap-2">${icon(t.icon, "size-4 shrink-0 text-teal-600")}<span>${esc(t.label)}</span></li>`
   ).join("\n  ")}
@@ -524,12 +516,12 @@ function trustStrip() {
 
 function heroMockup() {
   const bars = [
-    { h: 38, label: "فروردین" },
-    { h: 58, label: "اردیبهشت" },
-    { h: 46, label: "خرداد" },
-    { h: 74, label: "تیر" },
-    { h: 62, label: "مرداد" },
-    { h: 88, label: "شهریور" },
+    { h: 38, label: "تیر" },
+    { h: 58, label: "مرداد" },
+    { h: 46, label: "شهریور" },
+    { h: 74, label: "مهر" },
+    { h: 62, label: "آبان" },
+    { h: 88, label: "آذر" },
   ];
   return `<div class="relative">
   <div class="absolute -inset-x-6 -inset-y-8 -z-10 rounded-[2rem] bg-brand-100/40 blur-2xl" aria-hidden="true"></div>
@@ -540,7 +532,7 @@ function heroMockup() {
         <span class="size-2.5 rounded-full bg-ink-200"></span>
         <span class="size-2.5 rounded-full bg-ink-200"></span>
       </div>
-      <p class="text-[11px] font-bold text-ink-500">داشبورد مدیریتی · شهریور ۱۴۰۴</p>
+      <p class="text-[11px] font-bold text-ink-500">داشبورد مدیریتی · آذر ۱۴۰۵</p>
     </div>
 
     <div class="space-y-4 p-4 sm:p-5">
@@ -553,21 +545,21 @@ function heroMockup() {
         <div class="rounded-lg border border-ink-200 bg-white p-3">
           <p class="text-[10px] font-bold text-ink-500">تأیید در انتظار</p>
           <p class="mt-1 text-lg font-extrabold text-ink-900">۷</p>
-          <p class="mt-0.5 text-[10px] font-bold text-ink-500">میانگین ۴ ساعت</p>
+          <p class="mt-0.5 text-[10px] font-bold text-ink-500">در انتظار اقدام</p>
         </div>
         <div class="rounded-lg border border-ink-200 bg-white p-3">
-          <p class="text-[10px] font-bold text-ink-500">ارسال مؤدیان</p>
-          <p class="mt-1 text-lg font-extrabold text-ink-900">۹۸٪</p>
-          <p class="mt-0.5 text-[10px] font-bold text-teal-700">بدون مغایرت</p>
+          <p class="text-[10px] font-bold text-ink-500">صف ارسال مؤدیان</p>
+          <p class="mt-1 text-lg font-extrabold text-ink-900">۳</p>
+          <p class="mt-0.5 text-[10px] font-bold text-teal-700">آماده ارسال</p>
         </div>
       </div>
 
       <div class="rounded-lg border border-ink-200 bg-white p-4">
         <div class="flex items-center justify-between">
           <p class="text-xs font-extrabold text-ink-800">روند فروش شش‌ماهه</p>
-          <span class="badge-teal">${icon("trending", "size-3")} رشد ۱۸٪</span>
+          <span class="badge-neutral">نمای نمونه</span>
         </div>
-        <div class="mt-4 flex h-28 items-end gap-2" role="img" aria-label="نمودار میله‌ای روند فروش شش‌ماهه با رشد صعودی">
+        <div class="mt-4 flex h-28 items-end gap-2" role="img" aria-label="نمودار میله‌ای روند فروش شش‌ماهه">
           ${bars
             .map(
               (b, i) =>
@@ -582,7 +574,7 @@ function heroMockup() {
 
       <div class="space-y-2">
         <div class="flex items-center justify-between rounded-lg border border-ink-200 bg-white px-3 py-2.5">
-          <span class="flex items-center gap-2 text-[11px] font-bold text-ink-700">${icon("filecheck", "size-4 text-brand-600")} فاکتور خرید ۱۰۸۴</span>
+          <span class="flex items-center gap-2 text-[11px] font-bold text-ink-700">${icon("filecheck", "size-4 text-brand-600")} فاکتور خرید ۱۴۰۵/۰۸۴۲</span>
           <span class="badge-teal">تأیید شد</span>
         </div>
         <div class="flex items-center justify-between rounded-lg border border-ink-200 bg-white px-3 py-2.5">
@@ -645,12 +637,11 @@ const pages = [];
     <div class="container-page pt-10 pb-4 sm:pt-16">
       <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
         <div class="lg:col-span-6">
-          <p class="badge">${icon("sparkles", "size-3.5")} نسخه سازمانی راینو</p>
-          <h1 class="mt-5 text-h1 font-extrabold text-ink-900 sm:text-display">
+          <h1 class="text-h1 font-extrabold text-ink-900 sm:text-display">
             همه‌ی عملیات سازمان،<br class="hidden sm:block"> در یک سیستم فارسی
           </h1>
           <p class="mt-5 max-w-xl text-lead text-ink-600">
-            مالی، منابع انسانی، قرارداد، انبار و مالیات در یک پلتفرم یکپارچه؛ با تقویم شمسی، انطباق با سامانه مؤدیان و کنترل دسترسی سازمانی.
+            مالی، منابع انسانی، قرارداد، انبار و مالیات در یک سیستم واحد؛ گزارش‌ها همیشه با هم همخوان‌اند.
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="/demo.html" class="btn btn-primary">درخواست دموی رایگان ${icon("arrowleft", "size-4")}</a>
@@ -687,7 +678,7 @@ const pages = [];
           <p class="eyebrow">ماژول‌ها</p>
           <h2 id="modules-title" class="text-h2 font-extrabold">۱۵ ماژول در ۵ گروه کاری</h2>
           <p class="mt-3 text-sm leading-7 text-ink-600 sm:text-base">
-            هر ماژول به‌صورت مستقل قابل استقرار است و با بقیه‌ی ماژول‌ها داده‌ی مشترک دارد.
+            با یک ماژول شروع کنید و هر وقت لازم شد، ماژول‌های دیگر را اضافه کنید.
           </p>
         </div>
         <a href="/modules/index.html" class="btn btn-secondary btn-sm self-start sm:self-auto">همه ماژول‌ها ${icon("arrowleft", "size-3.5")}</a>
@@ -811,7 +802,7 @@ const pages = [];
         <p class="eyebrow">ماتریس امکانات</p>
         <h2 id="matrix-title" class="text-h2 font-extrabold">${fa(MATRIX.length)} قابلیت، قابل جست‌وجو</h2>
         <p class="mt-3 text-sm leading-7 text-ink-600 sm:text-base">
-          فهرست کامل امکانات به تفکیک ماژول، کاربر و نوع قابلیت. جست‌وجو و فیلتر بدون بارگذاری صفحه انجام می‌شود.
+          فهرست کامل امکانات، به تفکیک ماژول.
         </p>
       </div>
       ${matrixBlock({ idPrefix: "home-matrix" })}
@@ -858,15 +849,23 @@ const pages = [];
           <p class="mt-3 text-sm leading-7 text-ink-600 sm:text-base">
             فرم را تکمیل کنید؛ کارشناس ما در ساعات کاری تماس می‌گیرد و جلسه‌ی نمایش را متناسب با ماژول‌های مورد نیاز شما تنظیم می‌کند.
           </p>
-          <dl class="mt-8 grid grid-cols-2 gap-4">
-            ${STATS.map(
-              (s) => `<div class="card p-4">
-              <dt class="text-[11px] font-bold text-ink-500">${esc(s.label)}</dt>
-              <dd class="mt-1 text-xl font-extrabold text-ink-900">${esc(s.value)}</dd>
-              <dd class="mt-1 text-[11px] leading-5 text-ink-500">${esc(s.note)}</dd>
-            </div>`
-            ).join("\n            ")}
-          </dl>
+          <div class="mt-8">
+            <p class="text-sm font-extrabold text-ink-900">بعد از ثبت درخواست</p>
+            <ol class="mt-4 space-y-3">
+              ${[
+                "تماس کارشناس در ساعات کاری",
+                "جلسه‌ی ۳۰ دقیقه‌ای متناسب با ماژول‌های شما",
+                "بررسی مسیر استقرار",
+              ]
+                .map(
+                  (t, i) => `<li class="flex items-start gap-3 text-sm leading-7 text-ink-700">
+                <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-extrabold text-brand-700">${fa(i + 1)}</span>
+                <span>${esc(t)}</span>
+              </li>`
+                )
+                .join("\n              ")}
+            </ol>
+          </div>
         </div>
         <div class="lg:col-span-7">
           <div class="card p-5 shadow-card sm:p-7">
@@ -907,7 +906,7 @@ ${footer()}
       ${pageHeader({
         eyebrow: "ماژول‌ها",
         title: "۱۵ ماژول، یک سیستم",
-        lead: "هر ماژول مستقل قابل استقرار است و با بقیه‌ی ماژول‌ها داده‌ی مشترک دارد؛ بنابراین گزارش‌ها همیشه با هم همخوان هستند.",
+        lead: "با یک ماژول شروع کنید و هر وقت لازم شد، ماژول‌های دیگر را اضافه کنید.",
       })}
     </div>
   </section>
@@ -1134,7 +1133,7 @@ ${footer()}
 {
   const path = "/features.html";
   const title = "ماتریس امکانات راینو ERP | فهرست کامل قابلیت‌ها";
-  const description = `فهرست کامل ${fa(MATRIX.length)} قابلیت راینو ERP به تفکیک ماژول، دسته کاربر و نوع قابلیت؛ قابل جست‌وجو و فیلتر.`;
+  const description = `فهرست کامل ${fa(MATRIX.length)} قابلیت راینو ERP به تفکیک ماژول؛ قابل جست‌وجو و فیلتر.`;
 
   const body = `
 <main id="main">
@@ -1143,8 +1142,8 @@ ${footer()}
     <div class="container-page">
       ${pageHeader({
         eyebrow: "امکانات",
-        title: "همه‌ی قابلیت‌ها، بدون خلاصه‌سازی",
-        lead: `فهرست کامل ${fa(MATRIX.length)} قابلیت به تفکیک ماژول، کاربر و نوع. جست‌وجو و فیلتر بدون بارگذاری صفحه انجام می‌شود.`,
+        title: "همه‌ی قابلیت‌ها در یک نگاه",
+        lead: `فهرست کامل ${fa(MATRIX.length)} قابلیت به تفکیک ماژول، با جست‌وجو و فیلتر.`,
       })}
     </div>
   </section>
@@ -1199,7 +1198,7 @@ ${footer()}
     <div class="container-page">
       ${pageHeader({
         eyebrow: "امنیت",
-        title: "امنیت سازمانی، قابل اثبات",
+        title: "امنیت و کنترل دسترسی",
         lead: "دسترسی‌ها بر اساس نقش و مجوز تعیین می‌شوند، هر تغییر ثبت می‌شود و داده‌ی هر شرکت جدا نگهداری می‌شود.",
       })}
     </div>
@@ -1253,7 +1252,7 @@ ${footer()}
       <div class="grid gap-4 sm:grid-cols-3">
         <div class="card p-6">
           <h2 class="text-sm font-extrabold text-ink-900">استقرار</h2>
-          <p class="mt-2 text-sm leading-7 text-ink-600">روی سرور سازمان شما یا زیرساخت ابری مورد نظر شما؛ با پیکربندی اختصاصی هر مجموعه.</p>
+          <p class="mt-2 text-sm leading-7 text-ink-600">روی سرورهای خودتان یا فضای ابری دلخواه‌تان؛ تنظیمات هر سازمان هم اختصاصی انجام می‌شود.</p>
         </div>
         <div class="card p-6">
           <h2 class="text-sm font-extrabold text-ink-900">مهاجرت داده</h2>

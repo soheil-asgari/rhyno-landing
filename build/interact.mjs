@@ -148,7 +148,7 @@ async function main() {
 
   await evalJs(`(() => {
     const i = document.getElementById('features-matrix-search');
-    i.value = 'OCR';
+    i.value = 'بیمه';
     i.dispatchEvent(new Event('input', {bubbles:true}));
   })()`);
   await sleep(300);
@@ -163,15 +163,15 @@ async function main() {
   check("result count updates", /نمایش/.test(countText), countText);
 
   await evalJs(`(() => {
-    const s = document.getElementById('features-matrix-kind');
-    s.value = 'گزارش';
+    const s = document.getElementById('features-matrix-module');
+    s.value = 'قرارداد';
     s.dispatchEvent(new Event('change', {bubbles:true}));
   })()`);
   await sleep(250);
-  const afterKind = await evalJs(
+  const afterModule = await evalJs(
     `[...document.querySelectorAll('.matrix-row')].filter(r=>!r.hidden).length`
   );
-  check("kind filter combines with search", afterKind <= afterSearch, `${afterKind} visible`);
+  check("module filter combines with search", afterModule <= afterSearch, `${afterModule} visible`);
 
   await evalJs(`document.querySelector('[data-matrix-reset]').click()`);
   await sleep(250);

@@ -110,12 +110,14 @@ const blogFiles = files.filter((f) => {
 });
 
 if (blogFiles.length) {
-  if (!existsSync(join(ROOT, "blog", "feed.xml"))) problems.push("missing file: blog/feed.xml");
-
   const articleFiles = blogFiles.filter((f) => {
     const rel = f.replace(ROOT, "").replace(/\\/g, "/");
     return /^\/blog\/[a-z0-9-]+\/index\.html$/.test(rel);
   });
+
+  /* the feed is only built when at least one article is published */
+  if (articleFiles.length && !existsSync(join(ROOT, "blog", "feed.xml")))
+    problems.push("missing file: blog/feed.xml");
 
   for (const file of articleFiles) {
     const html = readFileSync(file, "utf8");
@@ -174,6 +176,22 @@ if (blogFiles.length) {
     for (const m of html.matchAll(/<h[1-6]\b[^>]*\bid="[^"]+"[^>]*>([\s\S]*?)<\/h[1-6]>/g)) {
       if (/<a\b/.test(m[1])) problems.push(`${rel}: auto-link inside an article heading`);
     }
+
+    /* cleanUrls: no internal href may point at an index.html file */
+    for (const m of html.matchAll(/href="([^"]*index\.html[^"]*)"/g)) {
+      problems.push(`${rel}: href leaks index.html -> ${m[1]}`);
+    }
+  }
+
+  /* latest-articles section is all-or-nothing: no empty heading, no empty grid */
+  {
+    const home = join(ROOT, "index.html");
+    const html = readFileSync(home, "utf8");
+    const section = html.match(/<section[^>]*aria-labelledby="blog-title"[\s\S]*?<\/section>/);
+    const cards = section ? [...section[0].matchAll(/<article\b/g)].length : 0;
+    if (section && cards === 0) problems.push("/: latest-articles section rendered with 0 cards");
+    if (!section && /تازه‌ترین راهنماها/.test(html))
+      problems.push("/: latest-articles heading rendered without a section");
   }
 
   /* sitemap: every published article exactly once */

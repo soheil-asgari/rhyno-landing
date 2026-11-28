@@ -5,7 +5,7 @@
   "description": "Static marketing site for Rhyno ERP (Persian, RTL, Tailwind v4)",
   "scripts": {
     "build:pages": "node ./build/pages.mjs",
-    "build:css": "tailwindcss -i ./tailwind.input.css -o ./dist/css/tailwind.css --minify",
+    "build:css": "tailwindcss -i ./tailwind.input.css -o ./dist/css/tailwind.css --minify --silent",
     "build:images": "node ./build/optimize-images.mjs",
     "build": "npm run build:pages && npm run build:css",
     "new-article": "node ./build/new-article.mjs",

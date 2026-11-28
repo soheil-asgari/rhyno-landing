@@ -54,8 +54,7 @@
     document.querySelectorAll("[data-matrix]").forEach(function (root) {
       var scope = root.parentElement;
       var search = scope.querySelector('[id$="-search"]');
-      var role = scope.querySelector('[id$="-role"]');
-      var kind = scope.querySelector('[id$="-kind"]');
+      var module = scope.querySelector('[id$="-module"]');
       var count = scope.querySelector("[data-matrix-count]");
       var reset = scope.querySelector("[data-matrix-reset]");
       var empty = root.querySelector("[data-matrix-empty]");
@@ -72,25 +71,17 @@
 
       function apply() {
         var q = (search && search.value ? search.value : "").trim().toLowerCase();
-        var r = role ? role.value : "";
-        var k = kind ? kind.value : "";
+        var m = module ? module.value : "";
         var shown = 0;
 
         rows.forEach(function (row) {
           var hay = (
             row.getAttribute("data-feature") +
             " " +
-            row.getAttribute("data-module") +
-            " " +
-            row.getAttribute("data-role") +
-            " " +
-            row.getAttribute("data-kind")
+            row.getAttribute("data-module")
           ).toLowerCase();
 
-          var ok =
-            (!q || hay.indexOf(q) !== -1) &&
-            (!r || row.getAttribute("data-role").indexOf(r) !== -1) &&
-            (!k || row.getAttribute("data-kind") === k);
+          var ok = (!q || hay.indexOf(q) !== -1) && (!m || row.getAttribute("data-module") === m);
 
           row.hidden = !ok;
           if (ok) shown++;
@@ -98,7 +89,7 @@
 
         if (count) count.textContent = "نمایش " + fa(shown) + " از " + fa(total) + " امکان";
         if (empty) empty.hidden = shown !== 0;
-        if (reset) reset.hidden = !(q || r || k);
+        if (reset) reset.hidden = !(q || m);
       }
 
       var timer;
@@ -108,13 +99,11 @@
           timer = setTimeout(apply, 120);
         });
       }
-      if (role) role.addEventListener("change", apply);
-      if (kind) kind.addEventListener("change", apply);
+      if (module) module.addEventListener("change", apply);
       if (reset) {
         reset.addEventListener("click", function () {
           if (search) search.value = "";
-          if (role) role.value = "";
-          if (kind) kind.value = "";
+          if (module) module.value = "";
           apply();
           if (search) search.focus();
         });
