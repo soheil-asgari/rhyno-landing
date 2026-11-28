@@ -27,8 +27,8 @@ export const SITE = {
     src: "https://trustseal.enamad.ir/logo.aspx?id=642420&Code=snXTJxUEZgVAphAqD5lpep29PJRZ2haT",
   },
   contact: {
-    phone: "021-77439141",
-    phoneHref: "+982177439141",
+    phone: "021-88357725",
+    phoneHref: "+982188357725",
     mobile: "0919-5920275",
     mobileHref: "+989195920275",
     whatsapp: "0998-1371524",
